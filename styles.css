@@ -361,6 +361,7 @@ body {
 }
 
 .service-card p {
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     color: var(--text-secondary);
     line-height: 1.7;
 }
