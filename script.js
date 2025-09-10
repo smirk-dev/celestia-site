@@ -38,6 +38,71 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Fullscreen video functionality for showreel
+function initFullscreenVideo() {
+    const showreelVideo = document.querySelector('.showreel-video');
+    if (!showreelVideo) return;
+
+    // Create fullscreen overlay
+    const createFullscreenOverlay = () => {
+        const overlay = document.createElement('div');
+        overlay.className = 'fullscreen-video-overlay';
+        overlay.innerHTML = `
+            <div class="fullscreen-video-container">
+                <video class="fullscreen-video" controls autoplay>
+                    <source src="./assets/showreel.mp4" type="video/mp4">
+                </video>
+                <button class="close-fullscreen">×</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        return overlay;
+    };
+
+    // Add click handler to showreel video
+    showreelVideo.addEventListener('click', (e) => {
+        e.preventDefault();
+        const overlay = createFullscreenOverlay();
+        const fullscreenVideo = overlay.querySelector('.fullscreen-video');
+        const closeBtn = overlay.querySelector('.close-fullscreen');
+
+        // Set video time to match the clicked video
+        fullscreenVideo.currentTime = showreelVideo.currentTime;
+        
+        // Show overlay
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        // Close functionality
+        const closeFullscreen = () => {
+            // Update original video time before closing
+            showreelVideo.currentTime = fullscreenVideo.currentTime;
+            overlay.remove();
+            document.body.style.overflow = 'auto';
+        };
+
+        closeBtn.addEventListener('click', closeFullscreen);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeFullscreen();
+        });
+
+        // ESC key to close
+        const handleKeydown = (e) => {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+                document.removeEventListener('keydown', handleKeydown);
+            }
+        };
+        document.addEventListener('keydown', handleKeydown);
+    });
+
+    // Add hover cursor pointer
+    showreelVideo.style.cursor = 'pointer';
+}
+
+// Initialize fullscreen video when DOM is loaded
+document.addEventListener('DOMContentLoaded', initFullscreenVideo);
+
 // Interactive 3D Arrow using Three.js
 class InteractiveArrow {
     constructor() {
