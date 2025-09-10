@@ -4,19 +4,22 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 // Mobile navigation toggle
 const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
+const navLeft = document.querySelector('.nav-left');
+const navRight = document.querySelector('.nav-right');
 
-if (hamburger && navMenu) {
+if (hamburger && navLeft && navRight) {
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+        navLeft.classList.toggle('active');
+        navRight.classList.toggle('active');
     });
 
     // Close mobile menu when clicking on a link
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+            navLeft.classList.remove('active');
+            navRight.classList.remove('active');
         });
     });
 }
