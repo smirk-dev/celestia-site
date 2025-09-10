@@ -100,8 +100,33 @@ function initFullscreenVideo() {
     showreelVideo.style.cursor = 'pointer';
 }
 
+// Hover-to-play video functionality for showreel
+function initHoverVideo() {
+    const showreelVideo = document.querySelector('.showreel-video');
+    if (!showreelVideo) return;
+
+    // Play video on hover
+    showreelVideo.addEventListener('mouseenter', () => {
+        showreelVideo.play().catch(e => {
+            console.log('Video play failed:', e);
+        });
+    });
+
+    // Pause video when hover ends
+    showreelVideo.addEventListener('mouseleave', () => {
+        showreelVideo.pause();
+        // Reset video to beginning for a cleaner effect
+        setTimeout(() => {
+            if (showreelVideo.paused) {
+                showreelVideo.currentTime = 0;
+            }
+        }, 100);
+    });
+}
+
 // Initialize fullscreen video when DOM is loaded
 document.addEventListener('DOMContentLoaded', initFullscreenVideo);
+document.addEventListener('DOMContentLoaded', initHoverVideo);
 
 // Interactive 3D Arrow using Three.js
 class InteractiveArrow {
