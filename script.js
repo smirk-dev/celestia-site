@@ -151,17 +151,19 @@ class InteractiveArrow {
     }
 
     loadArrowModel() {
-        // Check if OBJLoader is available
-        if (typeof THREE.OBJLoader === 'undefined') {
-            console.warn('OBJLoader not available, falling back to geometry arrow');
+        // Check if GLTFLoader is available
+        if (typeof THREE.GLTFLoader === 'undefined') {
+            console.warn('GLTFLoader not available, falling back to geometry arrow');
             this.createArrowGeometry();
             return;
         }
 
-        const loader = new THREE.OBJLoader();
+        const loader = new THREE.GLTFLoader();
         loader.load(
-            'arrow.obj',
-            (object) => {
+            './assets/arrow.gltf',
+            (gltf) => {
+                const object = gltf.scene;
+                
                 // Material for the loaded model
                 const arrowMaterial = new THREE.MeshPhongMaterial({ 
                     color: 0x9AE6FF,
@@ -188,7 +190,7 @@ class InteractiveArrow {
                 console.log('Arrow loading progress: ', (progress.loaded / progress.total * 100) + '%');
             },
             (error) => {
-                console.warn('Error loading arrow.obj, falling back to geometry arrow:', error);
+                console.warn('Error loading arrow.gltf, falling back to geometry arrow:', error);
                 this.createArrowGeometry();
             }
         );
