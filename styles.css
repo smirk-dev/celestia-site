@@ -306,7 +306,7 @@ body {
 }
 
 .services-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Bahnschrift', 'Space Grotesk', sans-serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     text-align: center;
