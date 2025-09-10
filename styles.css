@@ -6,6 +6,15 @@
     box-sizing: border-box;
 }
 
+/* Custom Font */
+@font-face {
+    font-family: 'Fontspring Theseasons';
+    src: url('./assets/Fontspring-DEMO-theseasons-bdit.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
 :root {
     --bg-primary: #0E0F12;
     --bg-secondary: #1a1d23;
