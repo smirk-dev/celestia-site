@@ -95,7 +95,7 @@ class InteractiveArrow {
 
         const loader = new THREE.OBJLoader();
         loader.load(
-            './assets/arrow.obj',
+            'arrow.obj',
             (object) => {
                 // Material for the loaded model
                 const arrowMaterial = new THREE.MeshPhongMaterial({ 
