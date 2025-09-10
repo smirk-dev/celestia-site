@@ -177,62 +177,142 @@ class InteractiveArrow {
     }
 
     loadArrowModel() {
-        // Check if GLTFLoader is available
-        if (typeof THREE.GLTFLoader === 'undefined') {
-            console.warn('GLTFLoader not available, creating fallback arrow');
-            this.createFallbackArrow();
-            return;
-        }
-
-        const loader = new THREE.GLTFLoader();
+        console.log('Loading 3D arrow...');
         
-        console.log('Loading arrow.gltf...');
+        // First, try to create a beautiful geometric arrow (most reliable)
+        this.createAdvancedGeometricArrow();
         
-        loader.load(
-            './assets/arrow.gltf',
-            (gltf) => {
-                console.log('Arrow GLTF loaded successfully:', gltf);
-                
-                this.arrow = gltf.scene;
-                
-                // Apply glowing material to all meshes
-                const glowMaterial = new THREE.MeshPhongMaterial({
-                    color: 0x9AE6FF,
-                    emissive: 0x4A73FF,
-                    emissiveIntensity: 0.3,
-                    shininess: 100,
-                    transparent: true,
-                    opacity: 0.9
-                });
+        // Optionally, try to load external model in parallel
+        this.tryLoadExternalModel();
+    }
 
-                this.arrow.traverse((child) => {
-                    if (child.isMesh) {
-                        child.material = glowMaterial;
-                        child.castShadow = true;
-                        child.receiveShadow = true;
+    createAdvancedGeometricArrow() {
+        console.log('Creating advanced geometric arrow');
+        
+        const arrowGroup = new THREE.Group();
+
+        // High-quality arrow material
+        const arrowMaterial = new THREE.MeshPhongMaterial({
+            color: 0x9AE6FF,
+            emissive: 0x4A73FF,
+            emissiveIntensity: 0.25,
+            shininess: 100,
+            transparent: true,
+            opacity: 0.95,
+            side: THREE.DoubleSide
+        });
+
+        // Arrow shaft (main body)
+        const shaftGeometry = new THREE.CylinderGeometry(0.04, 0.04, 1.8, 16);
+        const shaft = new THREE.Mesh(shaftGeometry, arrowMaterial);
+        shaft.rotation.z = Math.PI / 2;
+        shaft.castShadow = true;
+        arrowGroup.add(shaft);
+
+        // Arrow head (pointed tip)
+        const headGeometry = new THREE.ConeGeometry(0.15, 0.5, 16);
+        const head = new THREE.Mesh(headGeometry, arrowMaterial);
+        head.position.x = 1.15;
+        head.rotation.z = -Math.PI / 2;
+        head.castShadow = true;
+        arrowGroup.add(head);
+
+        // Arrow fletching (back feathers) - top
+        const fletchGeometry = new THREE.ConeGeometry(0.06, 0.25, 8);
+        const fletch1 = new THREE.Mesh(fletchGeometry, arrowMaterial);
+        fletch1.position.set(-0.8, 0.08, 0);
+        fletch1.rotation.z = Math.PI / 2;
+        arrowGroup.add(fletch1);
+
+        // Arrow fletching - bottom
+        const fletch2 = new THREE.Mesh(fletchGeometry, arrowMaterial);
+        fletch2.position.set(-0.8, -0.08, 0);
+        fletch2.rotation.z = Math.PI / 2;
+        arrowGroup.add(fletch2);
+
+        // Arrow fletching - side (3D effect)
+        const fletch3 = new THREE.Mesh(fletchGeometry, arrowMaterial);
+        fletch3.position.set(-0.8, 0, 0.08);
+        fletch3.rotation.x = Math.PI / 2;
+        fletch3.rotation.z = Math.PI / 2;
+        arrowGroup.add(fletch3);
+
+        // Arrow nock (back end detail)
+        const nockGeometry = new THREE.SphereGeometry(0.05, 12, 8);
+        const nock = new THREE.Mesh(nockGeometry, arrowMaterial);
+        nock.position.x = -0.9;
+        arrowGroup.add(nock);
+
+        // Add subtle glow effect
+        const glowGeometry = new THREE.CylinderGeometry(0.08, 0.08, 1.8, 16);
+        const glowMaterial = new THREE.MeshBasicMaterial({
+            color: 0x9AE6FF,
+            transparent: true,
+            opacity: 0.2,
+            side: THREE.DoubleSide
+        });
+        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+        glow.rotation.z = Math.PI / 2;
+        arrowGroup.add(glow);
+
+        // Set scale and add to scene
+        arrowGroup.scale.set(1.2, 1.2, 1.2);
+        
+        this.arrow = arrowGroup;
+        this.scene.add(this.arrow);
+        this.loaded = true;
+        
+        console.log('Advanced geometric arrow created and loaded successfully');
+    }
+
+    tryLoadExternalModel() {
+        // Try to load external OBJ file as enhancement
+        if (typeof THREE.OBJLoader !== 'undefined') {
+            console.log('Attempting to load external OBJ model...');
+            
+            const loader = new THREE.OBJLoader();
+            loader.load(
+                './assets/arrow.obj',
+                (object) => {
+                    console.log('External OBJ loaded, replacing geometric arrow');
+                    
+                    // Remove geometric arrow
+                    if (this.arrow) {
+                        this.scene.remove(this.arrow);
                     }
-                });
+                    
+                    // Process and add OBJ model
+                    const arrowMaterial = new THREE.MeshPhongMaterial({
+                        color: 0x9AE6FF,
+                        emissive: 0x4A73FF,
+                        emissiveIntensity: 0.25,
+                        shininess: 100,
+                        transparent: true,
+                        opacity: 0.95
+                    });
 
-                // Scale and position the arrow
-                this.arrow.scale.set(1.5, 1.5, 1.5);
-                this.arrow.position.set(0, 0, 0);
-                
-                // Add to scene
-                this.scene.add(this.arrow);
-                this.loaded = true;
-                
-                console.log('Arrow added to scene');
-            },
-            (progress) => {
-                const percent = Math.round((progress.loaded / progress.total) * 100);
-                console.log(`Arrow loading: ${percent}%`);
-            },
-            (error) => {
-                console.error('Error loading arrow.gltf:', error);
-                console.log('Creating fallback arrow instead');
-                this.createFallbackArrow();
-            }
-        );
+                    object.traverse((child) => {
+                        if (child.isMesh) {
+                            child.material = arrowMaterial;
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+                        }
+                    });
+
+                    object.scale.set(1.5, 1.5, 1.5);
+                    this.arrow = object;
+                    this.scene.add(this.arrow);
+                    
+                    console.log('External OBJ arrow loaded successfully');
+                },
+                undefined,
+                (error) => {
+                    console.log('External OBJ loading failed, keeping geometric arrow:', error);
+                }
+            );
+        } else {
+            console.log('OBJLoader not available, keeping geometric arrow');
+        }
     }
 
     createFallbackArrow() {
