@@ -218,9 +218,10 @@ body {
 }
 
 .agency-subtitle {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Fontspring Theseasons', 'Dancing Script', cursive;
     font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 600;
+    font-weight: bold;
+    font-style: italic;
     color: var(--accent-blue);
     margin-bottom: 30px;
     line-height: 1;
