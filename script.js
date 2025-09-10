@@ -63,20 +63,13 @@ class InteractiveArrow {
         this.scene = new THREE.Scene();
         
         // Camera setup
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
         this.camera.position.z = 5;
 
         // Renderer setup
         this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        this.renderer.setSize(200, 200); // Small size for the arrow
-        this.renderer.setClearColor(0x000000, 0); // Transparent background
-        
-        // Position the canvas in the top-right corner
-        this.renderer.domElement.style.position = 'fixed';
-        this.renderer.domElement.style.top = '20px';
-        this.renderer.domElement.style.right = '20px';
-        this.renderer.domElement.style.zIndex = '999';
-        this.renderer.domElement.style.pointerEvents = 'none';
+        this.renderer.setSize(250, 250);
+        this.renderer.setClearColor(0x000000, 0);
         
         container.appendChild(this.renderer.domElement);
 
