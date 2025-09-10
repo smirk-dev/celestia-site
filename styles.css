@@ -170,27 +170,7 @@ body {
     z-index: 3;
 }
 
-.hands-container {
-    position: relative;
-    display: inline-block;
-}
-
-.hero-logo {
-    width: 120px;
-    height: 120px;
-    filter: brightness(0) invert(1);
-    animation: glow 3s ease-in-out infinite alternate;
-    transform: translateY(-20px);
-}
-
-@keyframes glow {
-    0% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(154, 230, 255, 0.3));
-    }
-    100% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 40px rgba(154, 230, 255, 0.6));
-    }
-}
+/* Hero logo styles removed */
 
 /* Agency Section */
 .agency-section {
