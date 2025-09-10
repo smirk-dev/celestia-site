@@ -56,14 +56,15 @@ body {
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 120px;
 }
 
 .nav-left,
 .nav-right {
     display: flex;
-    gap: 60px;
+    gap: 40px;
     align-items: center;
 }
 
