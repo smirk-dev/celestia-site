@@ -431,6 +431,7 @@ body {
 }
 
 .footer p {
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     color: var(--text-muted);
     font-size: 14px;
 }
