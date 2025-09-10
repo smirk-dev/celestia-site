@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Celestia — Design that makes buying effortless</title>
+  <meta name="description" content="Celestia crafts premium, conversion-first websites with cinematic visuals that move people to act." />
+  <meta property="og:title" content="Celestia — Design that makes buying effortless" />
+  <meta property="og:description" content="Launch a site that looks incredible and sells the story in seconds." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og.jpg" />
+  <meta name="theme-color" content="#0E0F12" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav container">
+    <a class="brand" href="#home">
+      <img src="/assets/logo.svg" alt="Celestia" width="24" height="24">
+      <span>CELESTIA</span>
+    </a>
+    <nav class="row">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <video class="bg-video" autoplay muted loop playsinline poster="/assets/hero.jpg">
+      <source src="/assets/hero.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+  </section>
+
+  <!-- ABOUT + SHOWREEL -->
+  <section id="about" class="section container about">
+    <div class="about-left">
+      <h2>Showreel</h2>
+      <p class="muted">
+        Atmosphere. Scale. Detail. We design digital moments that feel alive—stunning visuals with a purpose:
+        to frame your story, focus attention, and move people to act.
+      </p>
+      <ul class="bullets">
+        <li>Fast-loading, cinematic visuals with clean UX</li>
+        <li>Crafted for performance, accessibility, and SEO</li>
+        <li>Built to convert: clear narrative, decisive calls-to-action</li>
+      </ul>
+    </div>
+    <div class="about-right">
+      <video controls playsinline poster="/assets/hero.jpg">
+        <source src="/assets/showreel.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section container">
+    <h2>Services</h2>
+    <div class="grid cards small">
+      <article class="card"><h3>Site Launchpad</h3><p class="muted">Conversion-first websites with analytics wired in from day one.</p></article>
+      <article class="card"><h3>Brand Starter</h3><p class="muted">Logo lockup, type & color system, voice and tone guardrails.</p></article>
+      <article class="card"><h3>Presence & Local</h3><p class="muted">Search, listings, and review engines so the right people find you.</p></article>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section container">
+    <div class="cta">
+      <h3>Let’s build something that sells itself.</h3>
+      <p class="muted">Drop a note and we’ll share a fast strategy take.</p>
+      <a class="btn primary" href="mailto:contact@celestia.studio">contact@celestia.studio</a>
+    </div>
+  </section>
+
+  <footer class="footer container">
+    © <span id="year"></span> Celestia • New Delhi
+  </footer>
+
+  <script src="/script.js" defer></script>
+</body>
+</html>
