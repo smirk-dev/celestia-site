@@ -6,6 +6,23 @@
     box-sizing: border-box;
 }
 
+/* Custom Font */
+@font-face {
+    font-family: 'Fontspring Theseasons';
+    src: url('./assets/Fontspring-DEMO-theseasons-bdit.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bahnschrift';
+    src: url('./assets/BAHNSCHRIFT.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --bg-primary: #0E0F12;
     --bg-secondary: #1a1d23;
@@ -70,6 +87,7 @@ body {
 .nav-link {
     color: var(--text-primary);
     text-decoration: none;
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     font-weight: 500;
     font-size: 14px;
     letter-spacing: 0.5px;
@@ -171,6 +189,7 @@ body {
 .agency-section {
     padding: 120px 0;
     position: relative;
+    background-color: #0A1A1E;
 }
 
 .agency-content {
@@ -199,7 +218,7 @@ body {
 }
 
 .agency-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Bahnschrift', 'Space Grotesk', sans-serif;
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 600;
     line-height: 1.2;
@@ -208,15 +227,17 @@ body {
 }
 
 .agency-subtitle {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Fontspring Theseasons', 'Dancing Script', cursive;
     font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 600;
+    font-weight: bold;
+    font-style: italic;
     color: var(--accent-blue);
     margin-bottom: 30px;
     line-height: 1;
 }
 
 .agency-description {
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.8;
     color: var(--text-secondary);
@@ -240,7 +261,7 @@ body {
 }
 
 .our-text {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Bahnschrift', 'Space Grotesk', sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     color: var(--text-primary);
@@ -249,15 +270,17 @@ body {
 }
 
 .showreel-text {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Fontspring Theseasons', 'Dancing Script', cursive;
     font-size: clamp(3rem, 6vw, 4.5rem);
-    font-weight: 600;
+    font-weight: bold;
+    font-style: italic;
     color: var(--accent-blue);
     display: block;
     line-height: 1;
 }
 
 .showreel-description {
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.8;
     color: var(--text-secondary);
@@ -283,7 +306,7 @@ body {
 }
 
 .services-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Bahnschrift', 'Space Grotesk', sans-serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     text-align: center;
@@ -330,7 +353,7 @@ body {
 }
 
 .service-card h3 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Bahnschrift', 'Space Grotesk', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 20px;
@@ -338,6 +361,7 @@ body {
 }
 
 .service-card p {
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     color: var(--text-secondary);
     line-height: 1.7;
 }
@@ -350,7 +374,7 @@ body {
 }
 
 .contact-content h3 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Bahnschrift', 'Space Grotesk', sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     margin-bottom: 20px;
@@ -358,6 +382,7 @@ body {
 }
 
 .contact-content p {
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     font-size: 18px;
     color: var(--text-secondary);
     margin-bottom: 40px;
@@ -370,6 +395,7 @@ body {
     padding: 18px 36px;
     border-radius: 50px;
     text-decoration: none;
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     font-weight: 600;
     font-size: 18px;
     transition: all 0.3s ease;
@@ -405,6 +431,7 @@ body {
 }
 
 .footer p {
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     color: var(--text-muted);
     font-size: 14px;
 }
