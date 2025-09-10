@@ -138,7 +138,7 @@ class InteractiveArrow {
         
         container.appendChild(this.renderer.domElement);
 
-        // Load the actual arrow.obj file
+        // Load the actual arrow.gltf file
         this.loadArrowModel();
 
         // Lighting
