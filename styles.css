@@ -382,6 +382,7 @@ body {
 }
 
 .contact-content p {
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     font-size: 18px;
     color: var(--text-secondary);
     margin-bottom: 40px;
