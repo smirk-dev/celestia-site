@@ -374,7 +374,7 @@ body {
 }
 
 .contact-content h3 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Bahnschrift', 'Space Grotesk', sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     margin-bottom: 20px;
