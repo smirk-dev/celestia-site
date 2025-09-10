@@ -218,7 +218,7 @@ body {
 }
 
 .agency-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Bahnschrift', 'Space Grotesk', sans-serif;
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 600;
     line-height: 1.2;
@@ -237,6 +237,7 @@ body {
 }
 
 .agency-description {
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.8;
     color: var(--text-secondary);
