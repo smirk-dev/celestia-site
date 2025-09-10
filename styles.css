@@ -87,6 +87,7 @@ body {
 .nav-link {
     color: var(--text-primary);
     text-decoration: none;
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     font-weight: 500;
     font-size: 14px;
     letter-spacing: 0.5px;
