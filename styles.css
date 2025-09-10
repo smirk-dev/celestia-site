@@ -15,6 +15,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Bahnschrift';
+    src: url('./assets/BAHNSCHRIFT.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --bg-primary: #0E0F12;
     --bg-secondary: #1a1d23;
