@@ -73,8 +73,8 @@ class InteractiveArrow {
         
         container.appendChild(this.renderer.domElement);
 
-        // Create arrow geometry (since we can't load OBJ without additional setup)
-        this.createArrowGeometry();
+        // Load the actual arrow.obj file
+        this.loadArrowModel();
 
         // Lighting
         const ambientLight = new THREE.AmbientLight(0x9AE6FF, 0.6);
@@ -83,6 +83,50 @@ class InteractiveArrow {
         const directionalLight = new THREE.DirectionalLight(0x9AE6FF, 0.8);
         directionalLight.position.set(1, 1, 1);
         this.scene.add(directionalLight);
+    }
+
+    loadArrowModel() {
+        // Check if OBJLoader is available
+        if (typeof THREE.OBJLoader === 'undefined') {
+            console.warn('OBJLoader not available, falling back to geometry arrow');
+            this.createArrowGeometry();
+            return;
+        }
+
+        const loader = new THREE.OBJLoader();
+        loader.load(
+            './assets/arrow.obj',
+            (object) => {
+                // Material for the loaded model
+                const arrowMaterial = new THREE.MeshPhongMaterial({ 
+                    color: 0x9AE6FF,
+                    emissive: 0x9AE6FF,
+                    emissiveIntensity: 0.2,
+                    shininess: 100
+                });
+
+                // Apply material to all meshes in the object
+                object.traverse((child) => {
+                    if (child.isMesh) {
+                        child.material = arrowMaterial;
+                    }
+                });
+
+                // Scale and position the arrow
+                object.scale.set(2, 2, 2);
+                object.position.set(0, 0, 0);
+                
+                this.arrow = object;
+                this.scene.add(this.arrow);
+            },
+            (progress) => {
+                console.log('Arrow loading progress: ', (progress.loaded / progress.total * 100) + '%');
+            },
+            (error) => {
+                console.warn('Error loading arrow.obj, falling back to geometry arrow:', error);
+                this.createArrowGeometry();
+            }
+        );
     }
 
     createArrowGeometry() {
