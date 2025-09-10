@@ -395,6 +395,7 @@ body {
     padding: 18px 36px;
     border-radius: 50px;
     text-decoration: none;
+    font-family: 'Bahnschrift', 'Inter', sans-serif;
     font-weight: 600;
     font-size: 18px;
     transition: all 0.3s ease;
