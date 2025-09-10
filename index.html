@@ -10,37 +10,44 @@
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/assets/og.jpg" />
   <meta name="theme-color" content="#0E0F12" />
-  <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+
+  <!-- Fonts (lightweight, cached) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <!-- NAV -->
-  <header class="nav container">
-    <a class="brand" href="#home">
-      <img src="/assets/logo.svg" alt="Celestia" width="24" height="24">
+  <!-- Fixed NAV over hero -->
+  <header class="nav container" role="banner">
+    <a class="brand" href="#home" aria-label="Celestia home">
+      <img src="/assets/logo.svg" alt="" width="24" height="24" style="vertical-align:middle;margin-right:8px;">
       <span>CELESTIA</span>
     </a>
-    <nav class="row">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
+    <nav class="row" aria-label="Primary">
+      <a class="navlink" href="#home">Home</a>
+      <a class="navlink" href="#about">About</a>
+      <a class="navlink" href="#services">Services</a>
+      <a class="navlink" href="#contact">Contact</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
+  <!-- START:HERO -->
+  <section id="home" class="hero" aria-label="Hero">
     <video class="bg-video" autoplay muted loop playsinline poster="/assets/hero.jpg">
       <source src="/assets/hero.mp4" type="video/mp4">
+      <!-- Provide your MP4 at /assets/hero.mp4 -->
     </video>
     <div class="overlay"></div>
+    <!-- Add overlay content via bot later if you want headline/CTAs -->
   </section>
+  <!-- END:HERO -->
 
-  <!-- ABOUT + SHOWREEL -->
-  <section id="about" class="section container about">
+  <!-- START:ABOUT -->
+  <section id="about" class="section container about" aria-label="About and Showreel">
     <div class="about-left">
       <h2>Showreel</h2>
       <p class="muted">
@@ -54,35 +61,64 @@
       </ul>
     </div>
     <div class="about-right">
-      <video controls playsinline poster="/assets/hero.jpg">
-        <source src="/assets/showreel.mp4" type="video/mp4">
-      </video>
+      <div class="reel-wrap">
+        <video controls playsinline poster="/assets/hero.jpg" aria-label="Showreel">
+          <source src="/assets/showreel.mp4" type="video/mp4">
+          <!-- Provide your MP4 at /assets/showreel.mp4 -->
+        </video>
+      </div>
     </div>
   </section>
+  <!-- END:ABOUT -->
 
-  <!-- SERVICES -->
-  <section id="services" class="section container">
+  <!-- START:SERVICES -->
+  <section id="services" class="section container" aria-label="Services">
     <h2>Services</h2>
     <div class="grid cards small">
-      <article class="card"><h3>Site Launchpad</h3><p class="muted">Conversion-first websites with analytics wired in from day one.</p></article>
-      <article class="card"><h3>Brand Starter</h3><p class="muted">Logo lockup, type & color system, voice and tone guardrails.</p></article>
-      <article class="card"><h3>Presence & Local</h3><p class="muted">Search, listings, and review engines so the right people find you.</p></article>
+      <article class="card">
+        <h3>Site Launchpad</h3>
+        <p class="muted">Conversion-first websites with analytics wired in from day one.</p>
+      </article>
+      <article class="card">
+        <h3>Brand Starter</h3>
+        <p class="muted">Logo lockup, type &amp; color system, voice and tone guardrails.</p>
+      </article>
+      <article class="card">
+        <h3>Presence &amp; Local</h3>
+        <p class="muted">Search, listings, and review engines so the right people find you.</p>
+      </article>
     </div>
   </section>
+  <!-- END:SERVICES -->
 
-  <!-- CONTACT -->
-  <section id="contact" class="section container">
+  <!-- START:CONTACT -->
+  <section id="contact" class="section container" aria-label="Contact">
     <div class="cta">
-      <h3>Let’s build something that sells itself.</h3>
-      <p class="muted">Drop a note and we’ll share a fast strategy take.</p>
-      <a class="btn primary" href="mailto:contact@celestia.studio">contact@celestia.studio</a>
+      <div>
+        <h3>Let’s build something that sells itself.</h3>
+        <p class="muted">Drop a note and we’ll share a fast strategy take.</p>
+      </div>
+      <div class="row">
+        <a class="btn primary" href="mailto:contact@celestia.studio">contact@celestia.studio</a>
+      </div>
     </div>
   </section>
+  <!-- END:CONTACT -->
 
-  <footer class="footer container">
+  <footer class="footer container" role="contentinfo">
     © <span id="year"></span> Celestia • New Delhi
   </footer>
 
   <script src="/script.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Celestia",
+    "url":"https://celestia.studio",
+    "logo":"https://celestia.studio/assets/logo.svg",
+    "sameAs":[]
+  }
+  </script>
 </body>
 </html>
