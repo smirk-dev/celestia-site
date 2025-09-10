@@ -407,7 +407,8 @@ body {
         display: flex;
     }
     
-    .nav-menu {
+    .nav-left,
+    .nav-right {
         position: fixed;
         left: -100%;
         top: 70px;
@@ -421,7 +422,8 @@ body {
         gap: 20px;
     }
     
-    .nav-menu.active {
+    .nav-left.active,
+    .nav-right.active {
         left: 0;
     }
     
@@ -439,11 +441,6 @@ body {
     .services-grid {
         grid-template-columns: 1fr;
         gap: 30px;
-    }
-    
-    .hero-logo {
-        width: 80px;
-        height: 80px;
     }
 }
 
