@@ -135,8 +135,7 @@ class InteractiveArrow {
         // Handle window resize
         window.addEventListener('resize', () => {
             if (this.camera && this.renderer) {
-                // Keep the arrow renderer size small
-                this.renderer.setSize(200, 200);
+                this.renderer.setSize(250, 250);
             }
         });
     }
