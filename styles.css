@@ -63,7 +63,7 @@ body {
 .nav-left,
 .nav-right {
     display: flex;
-    gap: 80px;
+    gap: 120px;
     align-items: center;
 }
 
