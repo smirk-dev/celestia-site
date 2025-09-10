@@ -1,124 +1,146 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Celestia — Design that makes buying effortless</title>
-  <meta name="description" content="Celestia crafts premium, conversion-first websites with cinematic visuals that move people to act." />
-  <meta property="og:title" content="Celestia — Design that makes buying effortless" />
-  <meta property="og:description" content="Launch a site that looks incredible and sells the story in seconds." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/assets/og.jpg" />
-  <meta name="theme-color" content="#0E0F12" />
-  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
-
-  <!-- Fonts (lightweight, cached) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestia — Design that makes buying effortless</title>
+    <meta name="description" content="We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Celestia — Design that makes buying effortless">
+    <meta property="og:description" content="Launch a site that looks incredible and sells the story in seconds.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./assets/og.jpg">
+    <meta property="og:url" content="https://celestia.studio">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js for 3D Arrow -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/OBJLoader.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Fixed NAV over hero -->
-  <header class="nav container" role="banner">
-    <a class="brand" href="#home" aria-label="Celestia home">
-      <img src="/assets/logo.svg" alt="" width="24" height="24" style="vertical-align:middle;margin-right:8px;">
-      <span>CELESTIA</span>
-    </a>
-    <nav class="row" aria-label="Primary">
-      <a class="navlink" href="#home">Home</a>
-      <a class="navlink" href="#about">About</a>
-      <a class="navlink" href="#services">Services</a>
-      <a class="navlink" href="#contact">Contact</a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="#home" class="nav-link">HOME</a>
+                <a href="#services" class="nav-link">SERVICES</a>
+            </div>
+            <div class="nav-right">
+                <a href="#projects" class="nav-link">PROJECTS</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <!-- START:HERO -->
-  <section id="home" class="hero" aria-label="Hero">
-    <video class="bg-video" autoplay muted loop playsinline poster="/assets/hero.jpg">
-      <source src="/assets/hero.mp4" type="video/mp4">
-      <!-- Provide your MP4 at /assets/hero.mp4 -->
-    </video>
-    <div class="overlay"></div>
-    <!-- Add overlay content via bot later if you want headline/CTAs -->
-  </section>
-  <!-- END:HERO -->
-
-  <!-- START:ABOUT -->
-  <section id="about" class="section container about" aria-label="About and Showreel">
-    <div class="about-left">
-      <h2>Showreel</h2>
-      <p class="muted">
-        Atmosphere. Scale. Detail. We design digital moments that feel alive—stunning visuals with a purpose:
-        to frame your story, focus attention, and move people to act.
-      </p>
-      <ul class="bullets">
-        <li>Fast-loading, cinematic visuals with clean UX</li>
-        <li>Crafted for performance, accessibility, and SEO</li>
-        <li>Built to convert: clear narrative, decisive calls-to-action</li>
-      </ul>
-    </div>
-    <div class="about-right">
-      <div class="reel-wrap">
-        <video controls playsinline poster="/assets/hero.jpg" aria-label="Showreel">
-          <source src="/assets/showreel.mp4" type="video/mp4">
-          <!-- Provide your MP4 at /assets/showreel.mp4 -->
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline poster="./assets/hero.jpg">
+            <source src="./assets/hero.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
-      </div>
-    </div>
-  </section>
-  <!-- END:ABOUT -->
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <!-- Logo removed from hero section -->
+            </div>
+        </div>
+    </section>
 
-  <!-- START:SERVICES -->
-  <section id="services" class="section container" aria-label="Services">
-    <h2>Services</h2>
-    <div class="grid cards small">
-      <article class="card">
-        <h3>Site Launchpad</h3>
-        <p class="muted">Conversion-first websites with analytics wired in from day one.</p>
-      </article>
-      <article class="card">
-        <h3>Brand Starter</h3>
-        <p class="muted">Logo lockup, type &amp; color system, voice and tone guardrails.</p>
-      </article>
-      <article class="card">
-        <h3>Presence &amp; Local</h3>
-        <p class="muted">Search, listings, and review engines so the right people find you.</p>
-      </article>
-    </div>
-  </section>
-  <!-- END:SERVICES -->
+    <!-- Agency Description Section -->
+    <section class="agency-section">
+        <div class="container">
+            <div class="agency-content">
+                <div class="agency-arrow">
+                    <!-- Interactive 3D Arrow -->
+                    <div id="arrow-container"></div>
+                </div>
+                <div class="agency-text">
+                    <h1 class="agency-title">WE ARE A FULL STACK</h1>
+                    <h2 class="agency-subtitle">Creative Agency</h2>
+                    <p class="agency-description">
+                        We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- START:CONTACT -->
-  <section id="contact" class="section container" aria-label="Contact">
-    <div class="cta">
-      <div>
-        <h3>Let’s build something that sells itself.</h3>
-        <p class="muted">Drop a note and we’ll share a fast strategy take.</p>
-      </div>
-      <div class="row">
-        <a class="btn primary" href="mailto:contact@celestia.studio">contact@celestia.studio</a>
-      </div>
-    </div>
-  </section>
-  <!-- END:CONTACT -->
+    <!-- Showreel Section -->
+    <section id="services" class="showreel-section">
+        <div class="container">
+            <div class="showreel-content">
+                <div class="showreel-left">
+                    <h2 class="showreel-title">
+                        <span class="our-text">OUR</span><br>
+                        <span class="showreel-text">Showreel</span>
+                    </h2>
+                    <p class="showreel-description">
+                        We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.
+                    </p>
+                </div>
+                <div class="showreel-right">
+                    <div class="video-container">
+                        <video class="showreel-video" autoplay muted loop playsinline>
+                            <source src="./assets/showreel.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer class="footer container" role="contentinfo">
-    © <span id="year"></span> Celestia • New Delhi
-  </footer>
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="services-title">Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Site Launchpad</h3>
+                    <p>Conversion-first websites with analytics wired in from day one. Fast-loading, responsive designs that capture attention and drive action.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Brand Starter</h3>
+                    <p>Logo lockup, type & color system, voice and tone guardrails. Complete brand identity that resonates with your target audience.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Presence & Local</h3>
+                    <p>Search, listings, and review engines so the right people find you. Local SEO optimization and digital presence management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script src="/script.js" defer></script>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"Celestia",
-    "url":"https://celestia.studio",
-    "logo":"https://celestia.studio/assets/logo.svg",
-    "sameAs":[]
-  }
-  </script>
-</body>
-</html>
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <h3>Let's build something that sells itself.</h3>
+                <p>Drop a note and we'll share a fast strategy take.</p>
+                <a href="mailto:contact@celestia.studio" class="contact-btn">contact@celestia.studio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="year"></span> Celestia • Creative Agency</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
