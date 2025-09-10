@@ -45,9 +45,9 @@ body {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 20px 0;
+    padding: 30px 0;
     background: transparent;
-    backdrop-filter: blur(10px);
+    backdrop-filter: none;
     transition: all 0.3s ease;
 }
 
@@ -60,15 +60,10 @@ body {
     align-items: center;
 }
 
-.nav-logo .logo-img {
-    height: 32px;
-    width: auto;
-    filter: brightness(0) invert(1);
-}
-
-.nav-menu {
+.nav-left,
+.nav-right {
     display: flex;
-    gap: 40px;
+    gap: 60px;
     align-items: center;
 }
 
