@@ -266,53 +266,135 @@ class InteractiveArrow {
     }
 
     tryLoadExternalModel() {
-        // Try to load external OBJ file as enhancement
-        if (typeof THREE.OBJLoader !== 'undefined') {
-            console.log('Attempting to load external OBJ model...');
+        console.log('Trying to load external 3D models...');
+        
+        // Try GLTF first (since you have arrow.gltf)
+        this.tryLoadGLTF()
+            .catch(() => this.tryLoadOBJ())
+            .catch(() => {
+                console.log('No external models loaded, using geometric arrow');
+            });
+    }
+
+    tryLoadGLTF() {
+        return new Promise((resolve, reject) => {
+            console.log('Attempting to load GLTF model...');
+            
+            // Check if we can dynamically load GLTFLoader
+            if (typeof THREE.GLTFLoader === 'undefined') {
+                // Try to load GLTFLoader dynamically
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
+                script.onload = () => {
+                    console.log('GLTFLoader loaded dynamically');
+                    this.loadGLTFFile(resolve, reject);
+                };
+                script.onerror = () => {
+                    console.log('Failed to load GLTFLoader dynamically');
+                    reject('GLTFLoader not available');
+                };
+                document.head.appendChild(script);
+            } else {
+                this.loadGLTFFile(resolve, reject);
+            }
+        });
+    }
+
+    loadGLTFFile(resolve, reject) {
+        const loader = new THREE.GLTFLoader();
+        
+        loader.load(
+            './assets/arrow.gltf',
+            (gltf) => {
+                console.log('GLTF loaded successfully, replacing geometric arrow');
+                
+                // Remove geometric arrow
+                if (this.arrow) {
+                    this.scene.remove(this.arrow);
+                }
+                
+                // Process GLTF model
+                const object = gltf.scene;
+                this.applyArrowMaterial(object);
+                
+                object.scale.set(1.5, 1.5, 1.5);
+                this.arrow = object;
+                this.scene.add(this.arrow);
+                
+                console.log('GLTF arrow loaded successfully');
+                resolve(object);
+            },
+            (progress) => {
+                if (progress.total > 0) {
+                    const percent = Math.round((progress.loaded / progress.total) * 100);
+                    console.log(`GLTF loading: ${percent}%`);
+                }
+            },
+            (error) => {
+                console.log('GLTF loading failed:', error);
+                reject(error);
+            }
+        );
+    }
+
+    tryLoadOBJ() {
+        return new Promise((resolve, reject) => {
+            if (typeof THREE.OBJLoader === 'undefined') {
+                console.log('OBJLoader not available');
+                reject('OBJLoader not available');
+                return;
+            }
+            
+            console.log('Attempting to load OBJ model...');
             
             const loader = new THREE.OBJLoader();
             loader.load(
                 './assets/arrow.obj',
                 (object) => {
-                    console.log('External OBJ loaded, replacing geometric arrow');
+                    console.log('OBJ loaded successfully, replacing geometric arrow');
                     
                     // Remove geometric arrow
                     if (this.arrow) {
                         this.scene.remove(this.arrow);
                     }
                     
-                    // Process and add OBJ model
-                    const arrowMaterial = new THREE.MeshPhongMaterial({
-                        color: 0x9AE6FF,
-                        emissive: 0x4A73FF,
-                        emissiveIntensity: 0.25,
-                        shininess: 100,
-                        transparent: true,
-                        opacity: 0.95
-                    });
-
-                    object.traverse((child) => {
-                        if (child.isMesh) {
-                            child.material = arrowMaterial;
-                            child.castShadow = true;
-                            child.receiveShadow = true;
-                        }
-                    });
-
+                    // Process OBJ model
+                    this.applyArrowMaterial(object);
+                    
                     object.scale.set(1.5, 1.5, 1.5);
                     this.arrow = object;
                     this.scene.add(this.arrow);
                     
-                    console.log('External OBJ arrow loaded successfully');
+                    console.log('OBJ arrow loaded successfully');
+                    resolve(object);
                 },
                 undefined,
                 (error) => {
-                    console.log('External OBJ loading failed, keeping geometric arrow:', error);
+                    console.log('OBJ loading failed:', error);
+                    reject(error);
                 }
             );
-        } else {
-            console.log('OBJLoader not available, keeping geometric arrow');
-        }
+        });
+    }
+
+    applyArrowMaterial(object) {
+        const arrowMaterial = new THREE.MeshPhongMaterial({
+            color: 0x9AE6FF,
+            emissive: 0x4A73FF,
+            emissiveIntensity: 0.25,
+            shininess: 100,
+            transparent: true,
+            opacity: 0.95
+        });
+
+        object.traverse((child) => {
+            if (child.isMesh) {
+                child.material = arrowMaterial;
+                child.castShadow = true;
+                child.receiveShadow = true;
+                console.log('Applied material to mesh:', child.name || 'unnamed');
+            }
+        });
     }
 
     createFallbackArrow() {
