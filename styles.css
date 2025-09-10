@@ -184,6 +184,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.agency-arrow #arrow-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    pointer-events: none;
 }
 
 .agency-text {
