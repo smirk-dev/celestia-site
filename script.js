@@ -153,7 +153,7 @@ class InteractiveArrow {
         // Add lighting
         this.setupLighting();
 
-        // Load the arrow model
+        // Load arrow with multiple fallback methods
         this.loadArrowModel();
     }
 
