@@ -372,10 +372,10 @@ body {
 
 .play-button-overlay:hover {
     transform: translate(-50%, -50%) scale(1.1);
-    background: rgba(154, 230, 255, 1);
+    background: rgba(107, 255, 250, 1);
     box-shadow: 
-        0 12px 48px rgba(154, 230, 255, 0.4),
-        0 0 0 3px rgba(154, 230, 255, 0.3);
+        0 12px 48px rgba(107, 255, 250, 0.4),
+        0 0 0 3px rgba(107, 255, 250, 0.3);
 }
 
 .play-button-overlay::before {
