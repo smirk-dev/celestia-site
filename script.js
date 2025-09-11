@@ -6,6 +6,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
 class CustomCursor {
     constructor() {
         this.cursor = null;
+        this.cursorX = 0;
+        this.cursorY = 0;
+        this.targetX = 0;
+        this.targetY = 0;
+        this.animationId = null;
         this.init();
     }
 
@@ -15,24 +20,43 @@ class CustomCursor {
         this.cursor.className = 'custom-cursor';
         document.body.appendChild(this.cursor);
 
-        // Track mouse movement
+        // Use RAF for smooth tracking
+        this.animate();
+
+        // Track mouse movement with throttling
+        let ticking = false;
         document.addEventListener('mousemove', (e) => {
-            this.cursor.style.left = e.clientX + 'px';
-            this.cursor.style.top = e.clientY + 'px';
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    this.targetX = e.clientX;
+                    this.targetY = e.clientY;
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
 
         // Add hover effects for interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .nav-link, .showreel-video');
-        
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                this.cursor.classList.add('hover');
-            });
+        const updateInteractiveElements = () => {
+            const interactiveElements = document.querySelectorAll('a, button, .nav-link, .showreel-video, [role="button"], input, textarea');
             
-            el.addEventListener('mouseleave', () => {
-                this.cursor.classList.remove('hover');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    this.cursor.classList.add('hover');
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    this.cursor.classList.remove('hover');
+                });
             });
-        });
+        };
+
+        // Initial setup and observe for dynamic elements
+        updateInteractiveElements();
+        
+        // Use MutationObserver for dynamically added elements
+        const observer = new MutationObserver(updateInteractiveElements);
+        observer.observe(document.body, { childList: true, subtree: true });
 
         // Hide cursor when leaving window
         document.addEventListener('mouseleave', () => {
@@ -42,6 +66,37 @@ class CustomCursor {
         document.addEventListener('mouseenter', () => {
             this.cursor.style.opacity = '1';
         });
+
+        // Handle page visibility
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.cursor.style.opacity = '0';
+            } else {
+                this.cursor.style.opacity = '1';
+            }
+        });
+    }
+
+    animate() {
+        // Smooth lerp animation for cursor position
+        const lerp = (start, end, factor) => start + (end - start) * factor;
+        
+        this.cursorX = lerp(this.cursorX, this.targetX, 0.15);
+        this.cursorY = lerp(this.cursorY, this.targetY, 0.15);
+        
+        // Use transform for better performance
+        this.cursor.style.transform = `translate3d(${this.cursorX}px, ${this.cursorY}px, 0) translate(-50%, -50%)`;
+        
+        this.animationId = requestAnimationFrame(() => this.animate());
+    }
+
+    destroy() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+        }
+        if (this.cursor) {
+            this.cursor.remove();
+        }
     }
 }
 
