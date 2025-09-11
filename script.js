@@ -2,6 +2,54 @@
 // Set current year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Custom Glowing Cursor
+class CustomCursor {
+    constructor() {
+        this.cursor = null;
+        this.init();
+    }
+
+    init() {
+        // Create cursor element
+        this.cursor = document.createElement('div');
+        this.cursor.className = 'custom-cursor';
+        document.body.appendChild(this.cursor);
+
+        // Track mouse movement
+        document.addEventListener('mousemove', (e) => {
+            this.cursor.style.left = e.clientX + 'px';
+            this.cursor.style.top = e.clientY + 'px';
+        });
+
+        // Add hover effects for interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .nav-link, .showreel-video');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                this.cursor.classList.add('hover');
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                this.cursor.classList.remove('hover');
+            });
+        });
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            this.cursor.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            this.cursor.style.opacity = '1';
+        });
+    }
+}
+
+// Initialize custom cursor when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new CustomCursor();
+});
+
 // Mobile navigation toggle
 const hamburger = document.getElementById('hamburger');
 const navLeft = document.querySelector('.nav-left');
