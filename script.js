@@ -599,8 +599,8 @@ class InteractiveArrow {
             const angle = Math.atan2(deltaY, deltaX);
             
             // Set target rotation to point arrow head toward mouse
-            // The arrow head is pointing in +X direction initially, so we use the angle directly
-            this.targetRotation.z = angle;
+            // Subtract π (180 degrees) to flip the arrow in the opposite direction
+            this.targetRotation.z = angle - Math.PI;
             
             // Add subtle 3D movement based on mouse position
             this.targetRotation.x = -deltaY * 0.0008;  // Slight pitch
