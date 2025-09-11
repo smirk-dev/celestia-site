@@ -404,7 +404,7 @@ class InteractiveArrow {
         }
 
         // Set scale and add to scene
-        arrowGroup.scale.set(3.9, 3.9, 3.9);
+        arrowGroup.scale.set(50.9, 50.9, 50.9);
         
         this.arrow = arrowGroup;
         this.scene.add(this.arrow);
@@ -454,7 +454,7 @@ class InteractiveArrow {
                 const object = gltf.scene;
                 this.applyArrowMaterial(object);
                 
-                object.scale.set(4.5, 4.5, 4.5);
+                object.scale.set(50.5, 50.5, 50.5);
                 this.arrow = object;
                 this.scene.add(this.arrow);
                 
