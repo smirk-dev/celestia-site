@@ -585,27 +585,29 @@ class InteractiveArrow {
 
     addEventListeners() {
         // Improved mouse tracking for arrow pointing
-        document.addEventListener('mousemove', (event) => {
-            // Get mouse position relative to the viewport
-            const rect = this.container.getBoundingClientRect();
-            const containerCenterX = rect.left + rect.width / 2;
-            const containerCenterY = rect.top + rect.height / 2;
-            
-            // Calculate direction from container center to mouse
-            const deltaX = event.clientX - containerCenterX;
-            const deltaY = event.clientY - containerCenterY;
-            
-            // Calculate angle to point arrow head toward cursor
-            const angle = Math.atan2(deltaY, deltaX);
-            
-            // Set target rotation to point arrow head toward mouse
-            // Subtract π (180 degrees) to flip the arrow in the opposite direction
-            this.targetRotation.z = angle - Math.PI;
-            
-            // Add subtle 3D movement based on mouse position
-            this.targetRotation.x = -deltaY * 0.0008;  // Slight pitch
-            this.targetRotation.y = deltaX * 0.0005;   // Slight yaw
-        });
+        // Improved mouse tracking for arrow pointing
+document.addEventListener('mousemove', (event) => {
+    // Get mouse position relative to the viewport
+    const rect = this.container.getBoundingClientRect();
+    const containerCenterX = rect.left + rect.width / 2;
+    const containerCenterY = rect.top + rect.height / 2;
+    
+    // Calculate direction from container center to mouse
+    const deltaX = event.clientX - containerCenterX;
+    const deltaY = event.clientY - containerCenterY;
+    
+    // Calculate angle to point arrow head toward cursor
+    const angle = Math.atan2(deltaY, deltaX);
+    
+    // Set target rotation to point arrow head toward mouse
+    // No need to subtract π - let the arrow point directly toward the cursor
+    this.targetRotation.z = angle;
+    
+    // Add subtle 3D movement based on mouse position
+    this.targetRotation.x = -deltaY * 0.0008;  // Slight pitch
+    this.targetRotation.y = deltaX * 0.0005;   // Slight yaw
+});
+
 
         // Handle window resize
         window.addEventListener('resize', () => {
