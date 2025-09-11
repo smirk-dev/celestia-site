@@ -378,7 +378,7 @@ class InteractiveArrow {
         this.arrow.scale.set(0.5, 0.5, 0.5);
         
         // Tilt the arrow 10 degrees towards the right
-        this.arrow.rotation.z = -Math.PI / 18; // -10 degrees in radians
+        this.arrow.rotation.z = Math.PI / 18; // 10 degrees in radians
         
         // Position the arrow
         this.arrow.position.set(0, 0, 0);
