@@ -201,14 +201,15 @@ function initFullscreenVideo() {
         document.addEventListener('keydown', handleKeydown);
     };
 
-    // Add click handlers for both video and play button
+    // Add click handlers with proper event handling
     const handleClick = (e) => {
         e.preventDefault();
+        e.stopPropagation(); // Prevent event bubbling
         openFullscreen();
     };
 
-    showreelVideo.addEventListener('click', handleClick);
-    playButton.addEventListener('click', handleClick);
+    // Only attach to the video container (parent element)
+    // This will handle clicks on video, play button, and container
     videoContainer.addEventListener('click', handleClick);
 
     // Show/hide play button based on video state
