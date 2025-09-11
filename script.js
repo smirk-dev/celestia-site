@@ -292,7 +292,7 @@ class InteractiveArrow {
 
     setupLighting() {
         // Ambient light for general illumination
-        const ambientLight = new THREE.AmbientLight(0x9AE6FF, 0.4);
+        const ambientLight = new THREE.AmbientLight(0x6BFFFA, 0.4);
         this.scene.add(ambientLight);
 
         // Directional light for highlights
