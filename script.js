@@ -162,41 +162,63 @@ function initFullscreenVideo() {
         return overlay;
     };
 
-    // Add click handler to showreel video
+    // Add click handler to showreel video for play/pause and fullscreen
+    let clickTimeout;
     showreelVideo.addEventListener('click', (e) => {
         e.preventDefault();
-        const overlay = createFullscreenOverlay();
-        const fullscreenVideo = overlay.querySelector('.fullscreen-video');
-        const closeBtn = overlay.querySelector('.close-fullscreen');
-
-        // Set video time to match the clicked video
-        fullscreenVideo.currentTime = showreelVideo.currentTime;
         
-        // Show overlay
-        overlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+        // Clear any existing timeout
+        if (clickTimeout) {
+            clearTimeout(clickTimeout);
+            clickTimeout = null;
+            
+            // Double click - open fullscreen
+            const overlay = createFullscreenOverlay();
+            const fullscreenVideo = overlay.querySelector('.fullscreen-video');
+            const closeBtn = overlay.querySelector('.close-fullscreen');
 
-        // Close functionality
-        const closeFullscreen = () => {
-            // Update original video time before closing
-            showreelVideo.currentTime = fullscreenVideo.currentTime;
-            overlay.remove();
-            document.body.style.overflow = 'auto';
-        };
+            // Set video time to match the clicked video
+            fullscreenVideo.currentTime = showreelVideo.currentTime;
+            
+            // Show overlay
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
 
-        closeBtn.addEventListener('click', closeFullscreen);
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) closeFullscreen();
-        });
+            // Close functionality
+            const closeFullscreen = () => {
+                // Update original video time before closing
+                showreelVideo.currentTime = fullscreenVideo.currentTime;
+                overlay.remove();
+                document.body.style.overflow = 'auto';
+            };
 
-        // ESC key to close
-        const handleKeydown = (e) => {
-            if (e.key === 'Escape') {
-                closeFullscreen();
-                document.removeEventListener('keydown', handleKeydown);
-            }
-        };
-        document.addEventListener('keydown', handleKeydown);
+            closeBtn.addEventListener('click', closeFullscreen);
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeFullscreen();
+            });
+
+            // ESC key to close
+            const handleKeydown = (e) => {
+                if (e.key === 'Escape') {
+                    closeFullscreen();
+                    document.removeEventListener('keydown', handleKeydown);
+                }
+            };
+            document.addEventListener('keydown', handleKeydown);
+            
+        } else {
+            // Single click - play/pause video
+            clickTimeout = setTimeout(() => {
+                if (showreelVideo.paused) {
+                    showreelVideo.play().catch(e => {
+                        console.log('Video play failed:', e);
+                    });
+                } else {
+                    showreelVideo.pause();
+                }
+                clickTimeout = null;
+            }, 250); // Wait 250ms to detect double click
+        }
     });
 
     // Add hover cursor pointer
