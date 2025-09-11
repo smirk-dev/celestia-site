@@ -487,10 +487,7 @@ class InteractiveArrow {
             this.arrow.position.y = Math.sin(time) * 0.05;
             this.arrow.position.x = Math.cos(time * 0.7) * 0.02;
             
-            // Add subtle rotation animation when not being controlled by mouse
-            if (!this.container.matches(':hover')) {
-                this.arrow.rotation.z += 0.01;
-            }
+            // Removed automatic rotation - arrow now only rotates based on mouse movement
         }
         
         if (this.renderer && this.scene && this.camera) {
