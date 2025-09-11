@@ -383,7 +383,7 @@ class InteractiveArrow {
         // Add subtle glow effect
         const glowGeometry = new THREE.CylinderGeometry(0.08, 0.08, 1.8, 16);
         const glowMaterial = new THREE.MeshBasicMaterial({
-            color: 0x6BFFFA,
+            color: 0xFFFFFF,
             transparent: true,
             opacity: 0.2,
             side: THREE.DoubleSide
