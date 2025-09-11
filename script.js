@@ -144,7 +144,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Fullscreen video functionality for showreel
 function initFullscreenVideo() {
     const showreelVideo = document.querySelector('.showreel-video');
-    if (!showreelVideo) return;
+    const playButton = document.getElementById('play-button');
+    const videoContainer = document.querySelector('.video-container');
+    
+    if (!showreelVideo || !playButton) return;
 
     // Create fullscreen overlay
     const createFullscreenOverlay = () => {
@@ -162,67 +165,72 @@ function initFullscreenVideo() {
         return overlay;
     };
 
-    // Add click handler to showreel video for play/pause and fullscreen
-    let clickTimeout;
-    showreelVideo.addEventListener('click', (e) => {
-        e.preventDefault();
+    // Function to open fullscreen
+    const openFullscreen = () => {
+        const overlay = createFullscreenOverlay();
+        const fullscreenVideo = overlay.querySelector('.fullscreen-video');
+        const closeBtn = overlay.querySelector('.close-fullscreen');
+
+        // Set video time to match the clicked video
+        fullscreenVideo.currentTime = showreelVideo.currentTime;
         
-        // Clear any existing timeout
-        if (clickTimeout) {
-            clearTimeout(clickTimeout);
-            clickTimeout = null;
-            
-            // Double click - open fullscreen
-            const overlay = createFullscreenOverlay();
-            const fullscreenVideo = overlay.querySelector('.fullscreen-video');
-            const closeBtn = overlay.querySelector('.close-fullscreen');
+        // Show overlay
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
 
-            // Set video time to match the clicked video
-            fullscreenVideo.currentTime = showreelVideo.currentTime;
-            
-            // Show overlay
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+        // Close functionality
+        const closeFullscreen = () => {
+            // Update original video time before closing
+            showreelVideo.currentTime = fullscreenVideo.currentTime;
+            overlay.remove();
+            document.body.style.overflow = 'auto';
+        };
 
-            // Close functionality
-            const closeFullscreen = () => {
-                // Update original video time before closing
-                showreelVideo.currentTime = fullscreenVideo.currentTime;
-                overlay.remove();
-                document.body.style.overflow = 'auto';
-            };
+        closeBtn.addEventListener('click', closeFullscreen);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeFullscreen();
+        });
 
-            closeBtn.addEventListener('click', closeFullscreen);
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) closeFullscreen();
-            });
+        // ESC key to close
+        const handleKeydown = (e) => {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+                document.removeEventListener('keydown', handleKeydown);
+            }
+        };
+        document.addEventListener('keydown', handleKeydown);
+    };
 
-            // ESC key to close
-            const handleKeydown = (e) => {
-                if (e.key === 'Escape') {
-                    closeFullscreen();
-                    document.removeEventListener('keydown', handleKeydown);
-                }
-            };
-            document.addEventListener('keydown', handleKeydown);
-            
+    // Add click handlers for both video and play button
+    const handleClick = (e) => {
+        e.preventDefault();
+        openFullscreen();
+    };
+
+    showreelVideo.addEventListener('click', handleClick);
+    playButton.addEventListener('click', handleClick);
+    videoContainer.addEventListener('click', handleClick);
+
+    // Show/hide play button based on video state
+    const updatePlayButton = () => {
+        if (showreelVideo.paused) {
+            playButton.classList.remove('hidden');
         } else {
-            // Single click - play/pause video
-            clickTimeout = setTimeout(() => {
-                if (showreelVideo.paused) {
-                    showreelVideo.play().catch(e => {
-                        console.log('Video play failed:', e);
-                    });
-                } else {
-                    showreelVideo.pause();
-                }
-                clickTimeout = null;
-            }, 250); // Wait 250ms to detect double click
+            playButton.classList.add('hidden');
         }
-    });
+    };
+
+    // Listen for video state changes
+    showreelVideo.addEventListener('play', updatePlayButton);
+    showreelVideo.addEventListener('pause', updatePlayButton);
+    showreelVideo.addEventListener('loadeddata', updatePlayButton);
+
+    // Initial state
+    updatePlayButton();
 
     // Add hover cursor pointer
     showreelVideo.style.cursor = 'pointer';
+    videoContainer.style.cursor = 'pointer';
 }
 
 // Initialize fullscreen video when DOM is loaded
