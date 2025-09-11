@@ -404,7 +404,7 @@ class InteractiveArrow {
         }
 
         // Set scale and add to scene
-        arrowGroup.scale.set(1.3, 1.3, 1.3);
+        arrowGroup.scale.set(3.9, 3.9, 3.9);
         
         this.arrow = arrowGroup;
         this.scene.add(this.arrow);
@@ -454,7 +454,7 @@ class InteractiveArrow {
                 const object = gltf.scene;
                 this.applyArrowMaterial(object);
                 
-                object.scale.set(1.5, 1.5, 1.5);
+                object.scale.set(4.5, 4.5, 4.5);
                 this.arrow = object;
                 this.scene.add(this.arrow);
                 
@@ -498,7 +498,7 @@ class InteractiveArrow {
                     // Process OBJ model
                     this.applyArrowMaterial(object);
                     
-                    object.scale.set(1.5, 1.5, 1.5);
+                    object.scale.set(4.5, 4.5, 4.5);
                     this.arrow = object;
                     this.scene.add(this.arrow);
                     
