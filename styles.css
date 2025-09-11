@@ -338,6 +338,7 @@ body {
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 .showreel-video {
@@ -345,6 +346,51 @@ body {
     height: auto;
     border-radius: 20px;
     display: block;
+}
+
+/* Play Button Overlay */
+.play-button-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(154, 230, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 8px 32px rgba(154, 230, 255, 0.3),
+        0 0 0 2px rgba(154, 230, 255, 0.2);
+    z-index: 2;
+}
+
+.play-button-overlay:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: rgba(154, 230, 255, 1);
+    box-shadow: 
+        0 12px 48px rgba(154, 230, 255, 0.4),
+        0 0 0 3px rgba(154, 230, 255, 0.3);
+}
+
+.play-button-overlay::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 20px solid rgba(255, 255, 255, 0.9);
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    margin-left: 4px;
+}
+
+.play-button-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Services Section */
