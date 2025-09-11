@@ -2,6 +2,109 @@
 // Set current year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Custom Glowing Cursor
+class CustomCursor {
+    constructor() {
+        this.cursor = null;
+        this.cursorX = 0;
+        this.cursorY = 0;
+        this.targetX = 0;
+        this.targetY = 0;
+        this.animationId = null;
+        this.init();
+    }
+
+    init() {
+        // Create cursor element
+        this.cursor = document.createElement('div');
+        this.cursor.className = 'custom-cursor';
+        document.body.appendChild(this.cursor);
+
+        // Use RAF for smooth tracking
+        this.animate();
+
+        // Track mouse movement with throttling
+        let ticking = false;
+        document.addEventListener('mousemove', (e) => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    this.targetX = e.clientX;
+                    this.targetY = e.clientY;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Add hover effects for interactive elements
+        const updateInteractiveElements = () => {
+            const interactiveElements = document.querySelectorAll('a, button, .nav-link, .showreel-video, [role="button"], input, textarea');
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    this.cursor.classList.add('hover');
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    this.cursor.classList.remove('hover');
+                });
+            });
+        };
+
+        // Initial setup and observe for dynamic elements
+        updateInteractiveElements();
+        
+        // Use MutationObserver for dynamically added elements
+        const observer = new MutationObserver(updateInteractiveElements);
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            this.cursor.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            this.cursor.style.opacity = '1';
+        });
+
+        // Handle page visibility
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.cursor.style.opacity = '0';
+            } else {
+                this.cursor.style.opacity = '1';
+            }
+        });
+    }
+
+    animate() {
+        // Smooth lerp animation for cursor position
+        const lerp = (start, end, factor) => start + (end - start) * factor;
+        
+        this.cursorX = lerp(this.cursorX, this.targetX, 0.15);
+        this.cursorY = lerp(this.cursorY, this.targetY, 0.15);
+        
+        // Use transform for better performance
+        this.cursor.style.transform = `translate3d(${this.cursorX}px, ${this.cursorY}px, 0) translate(-50%, -50%)`;
+        
+        this.animationId = requestAnimationFrame(() => this.animate());
+    }
+
+    destroy() {
+        if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+        }
+        if (this.cursor) {
+            this.cursor.remove();
+        }
+    }
+}
+
+// Initialize custom cursor when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new CustomCursor();
+});
+
 // Mobile navigation toggle
 const hamburger = document.getElementById('hamburger');
 const navLeft = document.querySelector('.nav-left');
@@ -404,7 +507,7 @@ class InteractiveArrow {
         }
 
         // Set scale and add to scene
-        arrowGroup.scale.set(1.3, 1.3, 1.3);
+        arrowGroup.scale.set(50.9, 50.9, 50.9);
         
         this.arrow = arrowGroup;
         this.scene.add(this.arrow);
@@ -454,7 +557,7 @@ class InteractiveArrow {
                 const object = gltf.scene;
                 this.applyArrowMaterial(object);
                 
-                object.scale.set(1.5, 1.5, 1.5);
+                object.scale.set(50.5, 50.5, 50.5);
                 this.arrow = object;
                 this.scene.add(this.arrow);
                 
@@ -498,7 +601,7 @@ class InteractiveArrow {
                     // Process OBJ model
                     this.applyArrowMaterial(object);
                     
-                    object.scale.set(1.5, 1.5, 1.5);
+                    object.scale.set(4.5, 4.5, 4.5);
                     this.arrow = object;
                     this.scene.add(this.arrow);
                     
@@ -584,28 +687,30 @@ class InteractiveArrow {
     }
 
     addEventListeners() {
-        // Improved mouse tracking
-        document.addEventListener('mousemove', (event) => {
-            // Get mouse position relative to the viewport
-            const rect = this.container.getBoundingClientRect();
-            const containerCenterX = rect.left + rect.width / 2;
-            const containerCenterY = rect.top + rect.height / 2;
-            
-            // Calculate direction from container center to mouse
-            const deltaX = event.clientX - containerCenterX;
-            const deltaY = event.clientY - containerCenterY;
-            
-            // Normalize the values
-            this.mouse.x = deltaX / (window.innerWidth / 2);
-            this.mouse.y = deltaY / (window.innerHeight / 2);
-            
-            // Calculate target rotations with improved sensitivity
-            this.targetRotation.y = this.mouse.x * Math.PI * 0.5; // Horizontal rotation
-            this.targetRotation.x = -this.mouse.y * Math.PI * 0.3; // Vertical rotation
-            
-            // Add slight roll for more dynamic movement
-            this.targetRotation.z = this.mouse.x * Math.PI * 0.1;
-        });
+        // Improved mouse tracking for arrow pointing
+        // Improved mouse tracking for arrow pointing
+document.addEventListener('mousemove', (event) => {
+    // Get mouse position relative to the viewport
+    const rect = this.container.getBoundingClientRect();
+    const containerCenterX = rect.left + rect.width / 2;
+    const containerCenterY = rect.top + rect.height / 2;
+    
+    // Calculate direction from container center to mouse
+    const deltaX = event.clientX - containerCenterX;
+    const deltaY = event.clientY - containerCenterY;
+    
+    // Calculate angle to point arrow head toward cursor
+    const angle = Math.atan2(deltaY, deltaX);
+    
+    // Set target rotation to point arrow head toward mouse
+    // No need to subtract π - let the arrow point directly toward the cursor
+    this.targetRotation.z = angle;
+    
+    // Add subtle 3D movement based on mouse position
+    this.targetRotation.x = -deltaY * 0.0008;  // Slight pitch
+    this.targetRotation.y = deltaX * 0.0005;   // Slight yaw
+});
+
 
         // Handle window resize
         window.addEventListener('resize', () => {
