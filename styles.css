@@ -45,11 +45,11 @@ html, body {
 .custom-cursor.hover {
     width: 30px;
     height: 30px;
-    background: radial-gradient(circle, rgba(154, 230, 255, 0.6) 0%, rgba(154, 230, 255, 0.3) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(107, 255, 250, 0.6) 0%, rgba(107, 255, 250, 0.3) 40%, transparent 70%);
     box-shadow: 
-        0 0 15px rgba(154, 230, 255, 0.8),
-        0 0 30px rgba(154, 230, 255, 0.5),
-        0 0 45px rgba(154, 230, 255, 0.3);
+        0 0 15px rgba(107, 255, 250, 0.8),
+        0 0 30px rgba(107, 255, 250, 0.5),
+        0 0 45px rgba(107, 255, 250, 0.3);
     transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
