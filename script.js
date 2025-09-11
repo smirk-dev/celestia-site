@@ -330,7 +330,7 @@ class InteractiveArrow {
 
         // High-quality arrow material
         const arrowMaterial = new THREE.MeshPhongMaterial({
-            color: 0x9AE6FF,
+            color: 0x6BFFFA,
             emissive: 0x4A73FF,
             emissiveIntensity: 0.25,
             shininess: 100,
