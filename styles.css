@@ -6,6 +6,53 @@
     box-sizing: border-box;
 }
 
+/* Custom Glowing Cursor */
+html, body {
+    cursor: none; /* Hide default cursor */
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(154, 230, 255, 0.8) 0%, rgba(154, 230, 255, 0.4) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease-out;
+    box-shadow: 
+        0 0 10px rgba(154, 230, 255, 0.6),
+        0 0 20px rgba(154, 230, 255, 0.4),
+        0 0 30px rgba(154, 230, 255, 0.2);
+}
+
+.custom-cursor::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Cursor hover effects */
+.custom-cursor.hover {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, rgba(154, 230, 255, 0.6) 0%, rgba(154, 230, 255, 0.3) 40%, transparent 70%);
+    box-shadow: 
+        0 0 15px rgba(154, 230, 255, 0.8),
+        0 0 30px rgba(154, 230, 255, 0.5),
+        0 0 45px rgba(154, 230, 255, 0.3);
+}
+
 /* Custom Font */
 @font-face {
     font-family: 'Fontspring Theseasons';
