@@ -460,7 +460,7 @@ class InteractiveArrow {
 
         // Enhanced materials
         const mainMaterial = new THREE.MeshPhongMaterial({
-            color: 0x9AE6FF,
+            color: 0x6BFFFA,
             emissive: 0x2A5FFF,
             emissiveIntensity: 0.3,
             shininess: 120,
@@ -470,7 +470,7 @@ class InteractiveArrow {
 
         const accentMaterial = new THREE.MeshPhongMaterial({
             color: 0xFFFFFF,
-            emissive: 0x9AE6FF,
+            emissive: 0x6BFFFA,
             emissiveIntensity: 0.5,
             shininess: 150,
             transparent: true,
@@ -526,7 +526,7 @@ class InteractiveArrow {
         for (let i = 0; i < 3; i++) {
             const glowGeometry = new THREE.RingGeometry(0.05 + i * 0.02, 0.07 + i * 0.02, 16);
             const glowMaterial = new THREE.MeshBasicMaterial({
-                color: 0x9AE6FF,
+                color: 0x6BFFFA,
                 transparent: true,
                 opacity: 0.3 - i * 0.1,
                 side: THREE.DoubleSide
@@ -649,7 +649,7 @@ class InteractiveArrow {
 
     applyArrowMaterial(object) {
         const arrowMaterial = new THREE.MeshPhongMaterial({
-            color: 0x9AE6FF,
+            color: 0x6BFFFA,
             emissive: 0x4A73FF,
             emissiveIntensity: 0.25,
             shininess: 100,
@@ -675,7 +675,7 @@ class InteractiveArrow {
 
         // Arrow material
         const arrowMaterial = new THREE.MeshPhongMaterial({
-            color: 0x9AE6FF,
+            color: 0x6BFFFA,
             emissive: 0x4A73FF,
             emissiveIntensity: 0.2,
             shininess: 100,
