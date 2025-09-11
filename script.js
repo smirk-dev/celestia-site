@@ -334,7 +334,7 @@ class InteractiveArrow {
             });
             
             // Scale the arrow appropriately
-            this.arrow.scale.set(1.5, 1.5, 1.5);
+            this.arrow.scale.set(50.5, 50.5, 50.5);
             
             // Position the arrow
             this.arrow.position.set(0, 0, 0);
