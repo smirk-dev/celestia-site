@@ -310,52 +310,78 @@ class InteractiveArrow {
     }
 
     createArrow() {
-        console.log('Loading GLTF arrow model');
+        console.log('Loading 3D arrow model');
         
-        // Load the GLTF model
-        const loader = new THREE.GLTFLoader();
+        // Try GLTF first, then fallback to OBJ, then simple geometry
+        const gltfLoader = new THREE.GLTFLoader();
         
-        loader.load('./assets/arrow.gltf', (gltf) => {
-            this.arrow = gltf.scene;
-            
-            // Set the arrow material to white with cyan glow
-            this.arrow.traverse((child) => {
-                if (child.isMesh) {
-                    child.material = new THREE.MeshPhongMaterial({
-                        color: 0xFFFFFF,
-                        emissive: 0x6BFFFA,
-                        emissiveIntensity: 0.15,
-                        shininess: 100,
-                        transparent: true,
-                        opacity: 0.95
-                    });
-                    child.castShadow = true;
-                }
-            });
-            
-            // Scale the arrow appropriately
-            this.arrow.scale.set(50.5, 50.5, 50.5);
-            
-            // Tilt the arrow 10 degrees towards the right
-            this.arrow.rotation.z = -Math.PI / 18; // -10 degrees in radians
-            
-            // Position the arrow
-            this.arrow.position.set(0, 0, 0);
-            
-            // Add to scene
-            this.scene.add(this.arrow);
-            this.loaded = true;
-            
-            console.log('GLTF arrow loaded and ready');
-        }, 
-        (progress) => {
-            console.log('Loading GLTF progress:', (progress.loaded / progress.total * 100) + '%');
-        },
-        (error) => {
-            console.error('Error loading GLTF arrow:', error);
-            // Fallback to creating a simple arrow if GLTF fails
-            this.createFallbackArrow();
+        gltfLoader.load('./assets/arrow.gltf', 
+            (gltf) => {
+                this.arrow = gltf.scene;
+                this.setupArrowMaterial();
+                this.setupArrowTransform();
+                this.scene.add(this.arrow);
+                this.loaded = true;
+                console.log('GLTF arrow loaded successfully');
+            },
+            (progress) => {
+                console.log('Loading GLTF progress:', (progress.loaded / progress.total * 100) + '%');
+            },
+            (error) => {
+                console.warn('GLTF failed, trying OBJ:', error);
+                this.loadObjArrow();
+            }
+        );
+    }
+
+    loadObjArrow() {
+        const objLoader = new THREE.OBJLoader();
+        
+        objLoader.load('./assets/arrow.obj',
+            (object) => {
+                this.arrow = object;
+                this.setupArrowMaterial();
+                this.setupArrowTransform();
+                this.scene.add(this.arrow);
+                this.loaded = true;
+                console.log('OBJ arrow loaded successfully');
+            },
+            (progress) => {
+                console.log('Loading OBJ progress:', (progress.loaded / progress.total * 100) + '%');
+            },
+            (error) => {
+                console.warn('OBJ failed, using fallback geometry:', error);
+                this.createFallbackArrow();
+            }
+        );
+    }
+
+    setupArrowMaterial() {
+        // Set the arrow material to white with cyan glow
+        this.arrow.traverse((child) => {
+            if (child.isMesh) {
+                child.material = new THREE.MeshPhongMaterial({
+                    color: 0xFFFFFF,
+                    emissive: 0x6BFFFA,
+                    emissiveIntensity: 0.15,
+                    shininess: 100,
+                    transparent: true,
+                    opacity: 0.95
+                });
+                child.castShadow = true;
+            }
         });
+    }
+
+    setupArrowTransform() {
+        // Scale the arrow appropriately
+        this.arrow.scale.set(0.5, 0.5, 0.5);
+        
+        // Tilt the arrow 10 degrees towards the right
+        this.arrow.rotation.z = -Math.PI / 18; // -10 degrees in radians
+        
+        // Position the arrow
+        this.arrow.position.set(0, 0, 0);
     }
 
     createFallbackArrow() {
@@ -461,10 +487,7 @@ class InteractiveArrow {
             this.arrow.position.y = Math.sin(time) * 0.05;
             this.arrow.position.x = Math.cos(time * 0.7) * 0.02;
             
-            // Add subtle rotation animation when not being controlled by mouse
-            if (!this.container.matches(':hover')) {
-                this.arrow.rotation.z += 0.01;
-            }
+            // Removed automatic rotation - arrow now only rotates based on mouse movement
         }
         
         if (this.renderer && this.scene && this.camera) {
