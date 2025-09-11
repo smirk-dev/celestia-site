@@ -356,7 +356,7 @@ body {
     transform: translate(-50%, -50%);
     width: 80px;
     height: 80px;
-    background: rgba(154, 230, 255, 0.9);
+    background: rgba(107, 255, 250, 0.9);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -365,8 +365,8 @@ body {
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
     box-shadow: 
-        0 8px 32px rgba(154, 230, 255, 0.3),
-        0 0 0 2px rgba(154, 230, 255, 0.2);
+        0 8px 32px rgba(107, 255, 250, 0.3),
+        0 0 0 2px rgba(107, 255, 250, 0.2);
     z-index: 2;
 }
 
