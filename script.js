@@ -460,7 +460,7 @@ class InteractiveArrow {
 
         // Enhanced materials
         const mainMaterial = new THREE.MeshPhongMaterial({
-            color: 0x6BFFFA,
+            color: 0xFFFFFF,
             emissive: 0x2A5FFF,
             emissiveIntensity: 0.3,
             shininess: 120,
