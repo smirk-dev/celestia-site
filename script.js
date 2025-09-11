@@ -310,75 +310,80 @@ class InteractiveArrow {
     }
 
     createArrow() {
-        console.log('Creating interactive 3D arrow');
+        console.log('Loading GLTF arrow model');
+        
+        // Load the GLTF model
+        const loader = new THREE.GLTFLoader();
+        
+        loader.load('./assets/arrow.gltf', (gltf) => {
+            this.arrow = gltf.scene;
+            
+            // Set the arrow material to white with cyan glow
+            this.arrow.traverse((child) => {
+                if (child.isMesh) {
+                    child.material = new THREE.MeshPhongMaterial({
+                        color: 0xFFFFFF,
+                        emissive: 0x6BFFFA,
+                        emissiveIntensity: 0.15,
+                        shininess: 100,
+                        transparent: true,
+                        opacity: 0.95
+                    });
+                    child.castShadow = true;
+                }
+            });
+            
+            // Scale the arrow appropriately
+            this.arrow.scale.set(1.5, 1.5, 1.5);
+            
+            // Position the arrow
+            this.arrow.position.set(0, 0, 0);
+            
+            // Add to scene
+            this.scene.add(this.arrow);
+            this.loaded = true;
+            
+            console.log('GLTF arrow loaded and ready');
+        }, 
+        (progress) => {
+            console.log('Loading GLTF progress:', (progress.loaded / progress.total * 100) + '%');
+        },
+        (error) => {
+            console.error('Error loading GLTF arrow:', error);
+            // Fallback to creating a simple arrow if GLTF fails
+            this.createFallbackArrow();
+        });
+    }
+
+    createFallbackArrow() {
+        console.log('Creating fallback arrow');
         
         const arrowGroup = new THREE.Group();
 
-        // High-quality arrow material
+        // Simple arrow geometry as fallback
         const arrowMaterial = new THREE.MeshPhongMaterial({
             color: 0xFFFFFF,
-            emissive: 0x4A73FF,
-            emissiveIntensity: 0.25,
+            emissive: 0x6BFFFA,
+            emissiveIntensity: 0.15,
             shininess: 100,
             transparent: true,
-            opacity: 0.95,
-            side: THREE.DoubleSide
+            opacity: 0.95
         });
 
-        // Arrow shaft (main body)
+        // Arrow shaft
         const shaftGeometry = new THREE.CylinderGeometry(0.04, 0.04, 1.8, 16);
         const shaft = new THREE.Mesh(shaftGeometry, arrowMaterial);
         shaft.rotation.z = Math.PI / 2;
         shaft.castShadow = true;
         arrowGroup.add(shaft);
 
-        // Arrow head (pointed tip)
+        // Arrow head
         const headGeometry = new THREE.ConeGeometry(0.15, 0.5, 16);
         const head = new THREE.Mesh(headGeometry, arrowMaterial);
         head.position.x = 1.15;
         head.rotation.z = -Math.PI / 2;
         head.castShadow = true;
         arrowGroup.add(head);
-
-        // Arrow fletching (back feathers)
-        const fletchGeometry = new THREE.ConeGeometry(0.06, 0.25, 8);
-        
-        // Top fletching
-        const fletch1 = new THREE.Mesh(fletchGeometry, arrowMaterial);
-        fletch1.position.set(-0.8, 0.08, 0);
-        fletch1.rotation.z = Math.PI / 2;
-        arrowGroup.add(fletch1);
-
-        // Bottom fletching
-        const fletch2 = new THREE.Mesh(fletchGeometry, arrowMaterial);
-        fletch2.position.set(-0.8, -0.08, 0);
-        fletch2.rotation.z = Math.PI / 2;
-        arrowGroup.add(fletch2);
-
-        // Side fletching (3D effect)
-        const fletch3 = new THREE.Mesh(fletchGeometry, arrowMaterial);
-        fletch3.position.set(-0.8, 0, 0.08);
-        fletch3.rotation.x = Math.PI / 2;
-        fletch3.rotation.z = Math.PI / 2;
-        arrowGroup.add(fletch3);
-
-        // Arrow nock (back end detail)
-        const nockGeometry = new THREE.SphereGeometry(0.05, 12, 8);
-        const nock = new THREE.Mesh(nockGeometry, arrowMaterial);
-        nock.position.x = -0.9;
-        arrowGroup.add(nock);
-
-        // Add subtle glow effect
-        const glowGeometry = new THREE.CylinderGeometry(0.08, 0.08, 1.8, 16);
-        const glowMaterial = new THREE.MeshBasicMaterial({
-            color: 0x6BFFFA,
-            transparent: true,
-            opacity: 0.2,
-            side: THREE.DoubleSide
-        });
-        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-        glow.rotation.z = Math.PI / 2;
-        arrowGroup.add(glow);
 
         // Set scale and add to scene
         arrowGroup.scale.set(1.2, 1.2, 1.2);
@@ -387,7 +392,7 @@ class InteractiveArrow {
         this.scene.add(this.arrow);
         this.loaded = true;
         
-        console.log('3D arrow created and loaded successfully');
+        console.log('Fallback arrow created successfully');
     }
 
     addEventListeners() {
