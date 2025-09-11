@@ -513,7 +513,7 @@ body {
 
 .contact-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(154, 230, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(107, 255, 250, 0.4);
 }
 
 /* Footer */
