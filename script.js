@@ -144,7 +144,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Fullscreen video functionality for showreel
 function initFullscreenVideo() {
     const showreelVideo = document.querySelector('.showreel-video');
-    if (!showreelVideo) return;
+    const playButton = document.getElementById('play-button');
+    const videoContainer = document.querySelector('.video-container');
+    
+    if (!showreelVideo || !playButton) return;
 
     // Create fullscreen overlay
     const createFullscreenOverlay = () => {
@@ -162,9 +165,8 @@ function initFullscreenVideo() {
         return overlay;
     };
 
-    // Add click handler to showreel video
-    showreelVideo.addEventListener('click', (e) => {
-        e.preventDefault();
+    // Function to open fullscreen
+    const openFullscreen = () => {
         const overlay = createFullscreenOverlay();
         const fullscreenVideo = overlay.querySelector('.fullscreen-video');
         const closeBtn = overlay.querySelector('.close-fullscreen');
@@ -197,10 +199,38 @@ function initFullscreenVideo() {
             }
         };
         document.addEventListener('keydown', handleKeydown);
-    });
+    };
+
+    // Add click handlers for both video and play button
+    const handleClick = (e) => {
+        e.preventDefault();
+        openFullscreen();
+    };
+
+    showreelVideo.addEventListener('click', handleClick);
+    playButton.addEventListener('click', handleClick);
+    videoContainer.addEventListener('click', handleClick);
+
+    // Show/hide play button based on video state
+    const updatePlayButton = () => {
+        if (showreelVideo.paused) {
+            playButton.classList.remove('hidden');
+        } else {
+            playButton.classList.add('hidden');
+        }
+    };
+
+    // Listen for video state changes
+    showreelVideo.addEventListener('play', updatePlayButton);
+    showreelVideo.addEventListener('pause', updatePlayButton);
+    showreelVideo.addEventListener('loadeddata', updatePlayButton);
+
+    // Initial state
+    updatePlayButton();
 
     // Add hover cursor pointer
     showreelVideo.style.cursor = 'pointer';
+    videoContainer.style.cursor = 'pointer';
 }
 
 // Initialize fullscreen video when DOM is loaded
@@ -262,11 +292,11 @@ class InteractiveArrow {
 
     setupLighting() {
         // Ambient light for general illumination
-        const ambientLight = new THREE.AmbientLight(0x9AE6FF, 0.4);
+        const ambientLight = new THREE.AmbientLight(0x6BFFFA, 0.4);
         this.scene.add(ambientLight);
 
         // Directional light for highlights
-        const directionalLight = new THREE.DirectionalLight(0x9AE6FF, 0.8);
+        const directionalLight = new THREE.DirectionalLight(0x6BFFFA, 0.8);
         directionalLight.position.set(5, 5, 5);
         directionalLight.castShadow = true;
         directionalLight.shadow.mapSize.width = 1024;
@@ -274,7 +304,7 @@ class InteractiveArrow {
         this.scene.add(directionalLight);
 
         // Point light for glow effect
-        const pointLight = new THREE.PointLight(0x9AE6FF, 0.6, 10);
+        const pointLight = new THREE.PointLight(0x6BFFFA, 0.6, 10);
         pointLight.position.set(2, 2, 2);
         this.scene.add(pointLight);
     }
@@ -300,7 +330,7 @@ class InteractiveArrow {
 
         // High-quality arrow material
         const arrowMaterial = new THREE.MeshPhongMaterial({
-            color: 0x9AE6FF,
+            color: 0xFFFFFF,
             emissive: 0x4A73FF,
             emissiveIntensity: 0.25,
             shininess: 100,
@@ -353,7 +383,7 @@ class InteractiveArrow {
         // Add subtle glow effect
         const glowGeometry = new THREE.CylinderGeometry(0.08, 0.08, 1.8, 16);
         const glowMaterial = new THREE.MeshBasicMaterial({
-            color: 0x9AE6FF,
+            color: 0xFFFFFF,
             transparent: true,
             opacity: 0.2,
             side: THREE.DoubleSide
@@ -430,7 +460,7 @@ class InteractiveArrow {
 
         // Enhanced materials
         const mainMaterial = new THREE.MeshPhongMaterial({
-            color: 0x9AE6FF,
+            color: 0xFFFFFF,
             emissive: 0x2A5FFF,
             emissiveIntensity: 0.3,
             shininess: 120,
@@ -440,7 +470,7 @@ class InteractiveArrow {
 
         const accentMaterial = new THREE.MeshPhongMaterial({
             color: 0xFFFFFF,
-            emissive: 0x9AE6FF,
+            emissive: 0x6BFFFA,
             emissiveIntensity: 0.5,
             shininess: 150,
             transparent: true,
@@ -496,7 +526,7 @@ class InteractiveArrow {
         for (let i = 0; i < 3; i++) {
             const glowGeometry = new THREE.RingGeometry(0.05 + i * 0.02, 0.07 + i * 0.02, 16);
             const glowMaterial = new THREE.MeshBasicMaterial({
-                color: 0x9AE6FF,
+                color: 0xFFFFFF,
                 transparent: true,
                 opacity: 0.3 - i * 0.1,
                 side: THREE.DoubleSide
@@ -619,7 +649,7 @@ class InteractiveArrow {
 
     applyArrowMaterial(object) {
         const arrowMaterial = new THREE.MeshPhongMaterial({
-            color: 0x9AE6FF,
+            color: 0xFFFFFF,
             emissive: 0x4A73FF,
             emissiveIntensity: 0.25,
             shininess: 100,
@@ -645,7 +675,7 @@ class InteractiveArrow {
 
         // Arrow material
         const arrowMaterial = new THREE.MeshPhongMaterial({
-            color: 0x9AE6FF,
+            color: 0xFFFFFF,
             emissive: 0x4A73FF,
             emissiveIntensity: 0.2,
             shininess: 100,
