@@ -442,7 +442,7 @@ body {
 .service-card:hover {
     transform: translateY(-5px);
     border-color: var(--accent-blue);
-    box-shadow: 0 10px 30px rgba(154, 230, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(107, 255, 250, 0.2);
 }
 
 .service-card h3 {
