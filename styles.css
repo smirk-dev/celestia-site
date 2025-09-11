@@ -409,6 +409,12 @@ body {
     line-height: 1;
 }
 
+.services-our {
+    font-family: 'Bahnschrift', 'Arial', sans-serif;
+    color: white;
+    font-style: normal;
+}
+
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
