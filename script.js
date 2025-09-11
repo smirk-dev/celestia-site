@@ -296,7 +296,7 @@ class InteractiveArrow {
         this.scene.add(ambientLight);
 
         // Directional light for highlights
-        const directionalLight = new THREE.DirectionalLight(0x9AE6FF, 0.8);
+        const directionalLight = new THREE.DirectionalLight(0x6BFFFA, 0.8);
         directionalLight.position.set(5, 5, 5);
         directionalLight.castShadow = true;
         directionalLight.shadow.mapSize.width = 1024;
@@ -304,7 +304,7 @@ class InteractiveArrow {
         this.scene.add(directionalLight);
 
         // Point light for glow effect
-        const pointLight = new THREE.PointLight(0x9AE6FF, 0.6, 10);
+        const pointLight = new THREE.PointLight(0x6BFFFA, 0.6, 10);
         pointLight.position.set(2, 2, 2);
         this.scene.add(pointLight);
     }
