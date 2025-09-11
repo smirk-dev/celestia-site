@@ -17,15 +17,15 @@ html, body {
     left: 0;
     width: 20px;
     height: 20px;
-    background: radial-gradient(circle, rgba(154, 230, 255, 0.8) 0%, rgba(154, 230, 255, 0.4) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(107, 255, 250, 0.8) 0%, rgba(107, 255, 250, 0.4) 40%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     will-change: transform;
     box-shadow: 
-        0 0 10px rgba(154, 230, 255, 0.6),
-        0 0 20px rgba(154, 230, 255, 0.4),
-        0 0 30px rgba(154, 230, 255, 0.2);
+        0 0 10px rgba(107, 255, 250, 0.6),
+        0 0 20px rgba(107, 255, 250, 0.4),
+        0 0 30px rgba(107, 255, 250, 0.2);
 }
 
 .custom-cursor::before {
@@ -77,8 +77,8 @@ html, body {
     --text-primary: #ffffff;
     --text-secondary: #b8bcc8;
     --text-muted: #6b7280;
-    --accent-blue: #9AE6FF;
-    --accent-glow: rgba(154, 230, 255, 0.3);
+    --accent-blue: #6BFFFA;
+    --accent-glow: rgba(107, 255, 250, 0.3);
     --border-color: #2a2d35;
     --shadow: rgba(0, 0, 0, 0.5);
     --gradient-overlay: linear-gradient(135deg, rgba(14, 15, 18, 0.7), rgba(26, 29, 35, 0.8));
