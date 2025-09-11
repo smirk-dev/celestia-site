@@ -584,7 +584,7 @@ class InteractiveArrow {
     }
 
     addEventListeners() {
-        // Improved mouse tracking
+        // Improved mouse tracking for arrow pointing
         document.addEventListener('mousemove', (event) => {
             // Get mouse position relative to the viewport
             const rect = this.container.getBoundingClientRect();
@@ -595,16 +595,16 @@ class InteractiveArrow {
             const deltaX = event.clientX - containerCenterX;
             const deltaY = event.clientY - containerCenterY;
             
-            // Normalize the values
-            this.mouse.x = deltaX / (window.innerWidth / 2);
-            this.mouse.y = deltaY / (window.innerHeight / 2);
+            // Calculate angle to point arrow head toward cursor
+            const angle = Math.atan2(deltaY, deltaX);
             
-            // Calculate target rotations with improved sensitivity
-            this.targetRotation.y = this.mouse.x * Math.PI * 0.5; // Horizontal rotation
-            this.targetRotation.x = -this.mouse.y * Math.PI * 0.3; // Vertical rotation
+            // Set target rotation to point arrow head toward mouse
+            // The arrow head is pointing in +X direction initially, so we use the angle directly
+            this.targetRotation.z = angle;
             
-            // Add slight roll for more dynamic movement
-            this.targetRotation.z = this.mouse.x * Math.PI * 0.1;
+            // Add subtle 3D movement based on mouse position
+            this.targetRotation.x = -deltaY * 0.0008;  // Slight pitch
+            this.targetRotation.y = deltaX * 0.0005;   // Slight yaw
         });
 
         // Handle window resize
