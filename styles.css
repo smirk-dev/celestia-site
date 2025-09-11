@@ -593,7 +593,7 @@ body {
 
 .showreel-video:hover {
     transform: scale(1.02);
-    box-shadow: 0 25px 50px rgba(154, 230, 255, 0.2);
+    box-shadow: 0 25px 50px rgba(107, 255, 250, 0.2);
 }
 
 /* Responsive Design */
