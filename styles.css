@@ -272,6 +272,30 @@ body {
     z-index: 1;
 }
 
+/* Mobile hero video adjustments */
+@media (max-width: 768px) {
+    .hero-video {
+        object-fit: cover;
+        object-position: center center;
+        transform: scale(0.9);
+        width: 110%;
+        height: 110%;
+        top: -5%;
+        left: -5%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-video {
+        transform: scale(0.85);
+        width: 115%;
+        height: 115%;
+        top: -7.5%;
+        left: -7.5%;
+        object-position: center center;
+    }
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;
