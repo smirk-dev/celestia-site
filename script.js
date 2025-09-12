@@ -574,6 +574,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show loading animation
             mobileLoading.style.display = 'flex';
             
+            // Apply mobile video adjustments
+            heroVideo.style.objectFit = 'contain';
+            heroVideo.style.objectPosition = 'center center';
+            if (window.innerWidth <= 480) {
+                heroVideo.style.transform = 'scale(0.85)';
+            }
+            
             // Hide loading when video can play
             heroVideo.addEventListener('canplay', () => {
                 setTimeout(() => {
