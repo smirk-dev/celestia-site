@@ -226,27 +226,6 @@ body {
     z-index: 1;
 }
 
-/* Mobile adjustments for landscape video on portrait screens */
-@media (max-width: 768px) and (orientation: portrait) {
-    .hero-video {
-        object-fit: cover;
-        object-position: center 90%;
-        width: 100%;
-        height: 120%;
-        top: -10%;
-    }
-}
-
-@media (max-width: 480px) and (orientation: portrait) {
-    .hero-video {
-        object-fit: cover;
-        object-position: center 75%;
-        width: 100%;
-        height: 140%;
-        top: -20%;
-    }
-}
-
 .hero-overlay {
     position: absolute;
     top: 0;
