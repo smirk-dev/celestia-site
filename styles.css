@@ -230,7 +230,7 @@ body {
 @media (max-width: 768px) and (orientation: portrait) {
     .hero-video {
         object-fit: cover;
-        object-position: center 40%;
+        object-position: center 60%;
         width: 100%;
         height: 120%;
         top: -10%;
