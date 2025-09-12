@@ -562,48 +562,6 @@ document.head.appendChild(style);
 // Video handling
 document.addEventListener('DOMContentLoaded', () => {
     const videos = document.querySelectorAll('video');
-    const mobileLoading = document.getElementById('mobile-loading');
-    const heroVideo = document.querySelector('.hero-video');
-    
-    // Mobile loading animation functionality
-    function initMobileVideoLoading() {
-        // Check if we're on a mobile device
-        const isMobile = window.innerWidth <= 768 && 'ontouchstart' in window;
-        
-        if (isMobile && mobileLoading && heroVideo) {
-            // Show loading animation
-            mobileLoading.style.display = 'flex';
-                        
-            // Hide loading when video can play
-            heroVideo.addEventListener('canplay', () => {
-                setTimeout(() => {
-                    mobileLoading.style.opacity = '0';
-                    setTimeout(() => {
-                        mobileLoading.style.display = 'none';
-                    }, 500);
-                }, 500); // Small delay to ensure smooth transition
-            });
-            
-            // Fallback: hide loading after 5 seconds even if video doesn't load
-            setTimeout(() => {
-                if (mobileLoading.style.display !== 'none') {
-                    mobileLoading.style.opacity = '0';
-                    setTimeout(() => {
-                        mobileLoading.style.display = 'none';
-                    }, 500);
-                }
-            }, 5000);
-        }
-    }
-    
-    // Initialize mobile loading
-    initMobileVideoLoading();
-    
-    // Handle orientation changes and resize events
-    window.addEventListener('resize', () => {
-        // Re-check mobile status on resize/orientation change
-        setTimeout(initMobileVideoLoading, 100);
-    });
     
     videos.forEach(video => {
         // Add loading states
