@@ -416,7 +416,8 @@ body {
     transform: translate(-50%, -50%);
     width: 80px;
     height: 80px;
-    background: rgba(107, 255, 250, 0.9);
+    background: transparent;
+    border: 3px solid rgba(107, 255, 250, 0.8);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -425,24 +426,25 @@ body {
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
     box-shadow: 
-        0 8px 32px rgba(107, 255, 250, 0.3),
-        0 0 0 2px rgba(107, 255, 250, 0.2);
+        0 8px 32px rgba(107, 255, 250, 0.2),
+        inset 0 0 0 0 rgba(107, 255, 250, 0.1);
     z-index: 2;
 }
 
 .play-button-overlay:hover {
     transform: translate(-50%, -50%) scale(1.1);
-    background: rgba(107, 255, 250, 1);
+    border-color: rgba(107, 255, 250, 1);
+    background: rgba(107, 255, 250, 0.1);
     box-shadow: 
         0 12px 48px rgba(107, 255, 250, 0.4),
-        0 0 0 3px rgba(107, 255, 250, 0.3);
+        inset 0 0 0 1px rgba(107, 255, 250, 0.2);
 }
 
 .play-button-overlay::before {
     content: '';
     width: 0;
     height: 0;
-    border-left: 20px solid rgba(255, 255, 255, 0.9);
+    border-left: 20px solid rgba(107, 255, 250, 0.9);
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
     margin-left: 4px;
