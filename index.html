@@ -109,31 +109,115 @@
             </div>
         </div>
     </section>
+<!-- START:SERVICES -->
+<section class="services-section" id="services" aria-labelledby="services-title">
+  <div class="sv-container">
+    <header class="sv-header">
+      <p class="sv-eyebrow">Our Services</p>
+      <h2 class="sv-title" id="services-title">Built to make you stand out</h2>
+      <p class="sv-sub">Clear packages. Outcome-driven. Designed for the new digital era.</p>
+    </header>
 
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="services-title">
-                <span class="services-our">OUR</span>
-                <span class="services-main">Services</span>
-            </h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Site Launchpad</h3>
-                    <p>Conversion-first websites with analytics wired in from day one. Fast-loading, responsive designs that capture attention and drive action.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Brand Starter</h3>
-                    <p>Logo lockup, type & color system, voice and tone guardrails. Complete brand identity that resonates with your target audience.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Presence & Local</h3>
-                    <p>Search, listings, and review engines so the right people find you. Local SEO optimization and digital presence management.</p>
-                </div>
-            </div>
+    <div class="sv-grid" role="list">
+      <!-- 1 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <!-- minimalist spark SVG -->
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 20l-2.2-7.8L4 10l5.8-2.2L12 2z"/></svg>
         </div>
-    </section>
+        <h3 class="sv-card-title">Website Launchpad</h3>
+        <p class="sv-card-text">Fast, mobile-first sites wired for conversion and analytics from day one.</p>
+      </article>
 
+      <!-- 2 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 17l9-12 9 12H3zm9-3l6 8H6l6-8z"/></svg>
+        </div>
+        <h3 class="sv-card-title">Brand Identity Starter</h3>
+        <p class="sv-card-text">Logo, color & type system, voice and story—built for recognition and trust.</p>
+      </article>
+
+      <!-- 3 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5l4 2"/></svg>
+        </div>
+        <h3 class="sv-card-title">Local Presence & Visibility</h3>
+        <p class="sv-card-text">Search, maps, reviews, and listings—so the right people find you first.</p>
+      </article>
+
+      <!-- 4 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 4h16v4H4zm0 6h10v4H4zm0 6h16v4H4z"/></svg>
+        </div>
+        <h3 class="sv-card-title">Social Content Engine</h3>
+        <p class="sv-card-text">On-brand posts, reels, and campaigns that cut through and stay consistent.</p>
+      </article>
+
+      <!-- 5 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg>
+        </div>
+        <h3 class="sv-card-title">3D & Visual Storytelling</h3>
+        <p class="sv-card-text">High-impact 3D, renders, and motion for products, spaces, and destinations.</p>
+      </article>
+
+      <!-- 6 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 12h6v8H3zm6-8h6v16H9zm6 6h6v10h-6z"/></svg>
+        </div>
+        <h3 class="sv-card-title">Growth & Performance</h3>
+        <p class="sv-card-text">Targeted campaigns, tracking, and optimization—design that performs.</p>
+      </article>
+    </div>
+
+    <!-- CTA bar -->
+    <div class="sv-cta">
+      <p class="sv-cta-text">Not sure which mix fits? We’ll tailor it to your goals.</p>
+      <a class="sv-button" href="mailto:contact@celestia.studio">Book a quick call</a>
+    </div>
+  </div>
+
+  <!-- Scoped styles -->
+  <style>
+    .services-section{--bg:#0e0f12;--card:#151821;--stroke:#1b2130;--muted:#aeb3c2;--text:#f6f7fb;--accent:#7fe8ff;--accentHi:#a8f3ff;}
+    .services-section{padding:72px 16px;background:var(--bg);}
+    .sv-container{max-width:1160px;margin:0 auto;}
+    .sv-header{text-align:center;margin-bottom:28px}
+    .sv-eyebrow{letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font:600 12px/1.2 system-ui,Arial}
+    .sv-title{margin:.35rem 0 .35rem;color:var(--text);font:700 40px/1.1 system-ui,Arial}
+    .sv-sub{color:var(--muted);max-width:720px;margin:0 auto 12px;font:400 16px/1.6 system-ui,Arial}
+
+    .sv-grid{display:grid;gap:16px;margin-top:18px}
+    @media (min-width:640px){.sv-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+    @media (min-width:960px){.sv-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+
+    .sv-card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+      border:1px solid var(--stroke);border-radius:16px;padding:20px;min-height:158px;color:var(--text);
+      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;outline:none;position:relative;isolation:isolate}
+    .sv-card:before{content:"";position:absolute;inset:-1px;border-radius:16px;pointer-events:none;
+      background:radial-gradient(120px 60px at 15% 0%,rgba(127,232,255,.25),transparent 60%);}
+    .sv-card:hover,.sv-card:focus{transform:translateY(-4px);
+      border-color:rgba(127,232,255,.55);box-shadow:0 8px 28px rgba(0,0,0,.35);}
+    .sv-icon{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;margin-bottom:10px;
+      color:var(--accent);background:rgba(127,232,255,.08);border:1px solid rgba(127,232,255,.25)}
+    .sv-card-title{margin:2px 0 6px;font:700 18px/1.3 system-ui,Arial;color:var(--text)}
+    .sv-card-text{margin:0;color:var(--muted);font:400 14px/1.6 system-ui,Arial}
+
+    .sv-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:24px;
+      background:rgba(127,232,255,.06);border:1px dashed rgba(127,232,255,.3);padding:16px;border-radius:14px}
+    .sv-cta-text{margin:0;color:var(--muted);font:500 14px/1.6 system-ui,Arial}
+    .sv-button{display:inline-block;padding:10px 16px;border-radius:10px;background:linear-gradient(180deg,var(--accent),var(--accentHi));
+      color:#081016;text-decoration:none;font:700 14px/1 system-ui,Arial;border:0}
+    .sv-button:hover{filter:brightness(1.05)}
+  </style>
+</section>
+<!-- END:SERVICES -->
+    
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
