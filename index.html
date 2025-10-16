@@ -1,366 +1,495 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestia</title>
-    <meta name="description" content="We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices.">
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom Cursor */
+html, body {
+    cursor: none;
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(83, 245, 255, 0.8) 0%, rgba(83, 245, 255, 0.4) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+    box-shadow: 0 0 10px rgba(83, 245, 255, 0.6), 0 0 20px rgba(83, 245, 255, 0.4);
+    transition: transform 0.1s ease;
+}
+
+/* Fonts */
+@font-face {
+    font-family: 'Bahnschrift';
+    src: url('./assets/BAHNSCHRIFT.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Root Variables */
+:root {
+    --bg-primary: #0a0f14;
+    --bg-secondary: #0e1318;
+    --bg-card: rgba(14, 19, 24, 0.7);
+    --text-primary: #ffffff;
+    --text-secondary: #b8bcc8;
+    --text-muted: #6b7280;
+    --accent-cyan: #53f5ff;
+    --accent-cyan-dark: #29daef;
+    --accent-glow: rgba(83, 245, 255, 0.3);
+    --glass-bg: rgba(14, 17, 24, 0.7);
+    --glass-border: rgba(83, 245, 255, 0.1);
+    --blur: blur(20px);
+    --pill-radius: 30px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0a0f14 0%, #0e1318 50%, #0a1a1e 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--pill-radius);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.nav-link {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-cta {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-cyan-dark) 100%);
+    color: #0a0f14;
+    padding: 10px 24px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(83, 245, 255, 0.3);
+}
+
+.nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(83, 245, 255, 0.5);
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 24px;
+}
+
+.hero-logo {
+    margin-bottom: 24px;
+}
+
+.logo-icon {
+    width: 120px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(83, 245, 255, 0.5));
+}
+
+.brand-name {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    letter-spacing: 4px;
+}
+
+.hero-title {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+.hero-subtitle {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 30px rgba(83, 245, 255, 0.5);
+}
+
+.hero-description {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 48px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-tagline {
+    margin-bottom: 48px;
+}
+
+.tagline-text {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.tagline-highlight {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--accent-cyan);
+    text-shadow: 0 0 20px rgba(83, 245, 255, 0.5);
+}
+
+.scroll-indicator {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Section Styles */
+.explainer-section,
+.showreel-section {
+    padding: 120px 0;
+    background: var(--bg-secondary);
+}
+
+.section-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.section-content.reverse {
+    grid-template-columns: 1fr 1fr;
+}
+
+.section-title {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+.highlight {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 20px rgba(83, 245, 255, 0.5);
+}
+
+.section-description {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.video-container {
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--pill-radius);
+    padding: 80px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.video-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(83, 245, 255, 0.2);
+}
+
+.play-button {
+    font-size: 48px;
+    color: var(--accent-cyan);
+    filter: drop-shadow(0 0 20px rgba(83, 245, 255, 0.5));
+}
+
+/* Services Section */
+.services-section {
+    padding: 120px 0;
+    background: var(--bg-primary);
+}
+
+.services-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.services-arrows {
+    font-size: 48px;
+    color: var(--text-secondary);
+}
+
+.services-title .section-title {
+    margin-bottom: 16px;
+}
+
+.services-subtitle {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.services-tagline {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.service-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--pill-radius);
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(83, 245, 255, 0.1);
+    border-color: var(--accent-cyan);
+}
+
+.service-card h3 {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.service-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 120px 0;
+    background: var(--bg-secondary);
+}
+
+.contact-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--pill-radius);
+    padding: 48px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.contact-title {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.contact-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+.contact-email {
+    font-family: 'Bahnschrift', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-cyan-dark) 100%);
+    color: #0a0f14;
+    padding: 16px 32px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(83, 245, 255, 0.3);
+}
+
+.contact-email:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(83, 245, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 8px 16px;
+        gap: 24px;
+    }
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Celestia">
-    <meta property="og:description" content="Launch a site that looks incredible and sells the story in seconds.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="./assets/og.jpg">
-    <meta property="og:url" content="https://celestia.studio">
+    .nav-links {
+        gap: 16px;
+    }
     
-    <!-- Favicon -->
-    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+    .nav-link {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    .nav-cta {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
     
-    <!-- Three.js for 3D Arrow -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    .section-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
     
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-left">
-                <a href="#home" class="nav-link">HOME</a>
-                <a href="#about" class="nav-link">ABOUT</a>
-            </div>
-            <div class="nav-right">
-                <a href="#services" class="nav-link">SERVICES</a>
-                <a href="#contact" class="nav-link">CONTACT</a>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <video class="hero-video" autoplay muted loop playsinline poster="./assets/hero.jpg">
-            <source src="./assets/hero.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <!-- Logo removed from hero section -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Agency Description Section -->
-    <section id= "about" class="agency-section">
-        <div class="container">
-            <div class="agency-content">
-                <div class="agency-arrow">
-                    <!-- Interactive 3D Arrow -->
-                    <div id="arrow-container"></div>
-                </div>
-                <div class="agency-text">
-                    <h1 class="agency-title">WE ARE A FULL STACK</h1>
-                    <h2 class="agency-subtitle">Creative Agency</h2>
-                    <p class="agency-description">
-                        We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Showreel Section -->
-    <section class="showreel-section">
-        <div class="container">
-            <div class="showreel-content">
-                <div class="showreel-left">
-                    <h2 class="showreel-title">
-                        <span class="our-text">OUR</span><br>
-                        <span class="showreel-text">Showreel</span>
-                    </h2>
-                    <p class="showreel-description">
-                        Atmosphere. Scale. Detail. We design digital moments that feel alive—stunning visuals with a purpose: to frame your story, focus attention, and move people to act.
-
-                        Fast-loading, cinematic visuals with clean UX
-                        Crafted for performance, accessibility, and SEO
-                        Built to convert: clear narrative, decisive calls-to-action
-                    </p>
-                </div>
-                <div class="showreel-right">
-                    <div class="video-container">
-                        <video class="showreel-video" muted loop playsinline poster="./assets/thumbnail.jpeg">
-                            <source src="./assets/showreel.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="play-button-overlay" id="play-button">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-<!-- START:SERVICES -->
-<section class="services-section" id="services" aria-labelledby="services-title">
-  <div class="sv-container">
-    <header class="sv-header">
-      <p class="sv-eyebrow">Our Services</p>
-      <h2 class="sv-title" id="services-title">Built to make you stand out</h2>
-      <p class="sv-sub">Clear packages. Outcome-driven. Designed for the new digital era.</p>
-    </header>
-
-    <div class="sv-grid" role="list">
-      <!-- 1 -->
-      <article class="sv-card" role="listitem" tabindex="0">
-        <div class="sv-icon" aria-hidden="true">
-          <!-- minimalist spark SVG -->
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 20l-2.2-7.8L4 10l5.8-2.2L12 2z"/></svg>
-        </div>
-        <h3 class="sv-card-title">Website Launchpad</h3>
-        <p class="sv-card-text">Fast, mobile-first sites wired for conversion and analytics from day one.</p>
-      </article>
-
-      <!-- 2 -->
-      <article class="sv-card" role="listitem" tabindex="0">
-        <div class="sv-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 17l9-12 9 12H3zm9-3l6 8H6l6-8z"/></svg>
-        </div>
-        <h3 class="sv-card-title">Brand Identity Starter</h3>
-        <p class="sv-card-text">Logo, color & type system, voice and story—built for recognition and trust.</p>
-      </article>
-
-      <!-- 3 -->
-      <article class="sv-card" role="listitem" tabindex="0">
-        <div class="sv-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5l4 2"/></svg>
-        </div>
-        <h3 class="sv-card-title">Local Presence & Visibility</h3>
-        <p class="sv-card-text">Search, maps, reviews, and listings—so the right people find you first.</p>
-      </article>
-
-      <!-- 4 -->
-      <article class="sv-card" role="listitem" tabindex="0">
-        <div class="sv-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 4h16v4H4zm0 6h10v4H4zm0 6h16v4H4z"/></svg>
-        </div>
-        <h3 class="sv-card-title">Social Content Engine</h3>
-        <p class="sv-card-text">On-brand posts, reels, and campaigns that cut through and stay consistent.</p>
-      </article>
-
-      <!-- 5 -->
-      <article class="sv-card" role="listitem" tabindex="0">
-        <div class="sv-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg>
-        </div>
-        <h3 class="sv-card-title">3D & Visual Storytelling</h3>
-        <p class="sv-card-text">High-impact 3D, renders, and motion for products, spaces, and destinations.</p>
-      </article>
-
-      <!-- 6 -->
-      <article class="sv-card" role="listitem" tabindex="0">
-        <div class="sv-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 12h6v8H3zm6-8h6v16H9zm6 6h6v10h-6z"/></svg>
-        </div>
-        <h3 class="sv-card-title">Growth & Performance</h3>
-        <p class="sv-card-text">Targeted campaigns, tracking, and optimization—design that performs.</p>
-      </article>
-    </div>
-
-    <!-- CTA bar -->
-    <div class="sv-cta">
-      <p class="sv-cta-text">Every brand has different needs. Let’s build the right mix for yours</p>
-      <a class="sv-button" href="mailto:contact@celestia.studio">Book a quick call</a>
-    </div>
-  </div>
-
-  <!-- Scoped styles -->
-  <style>
-    .services-section{--bg:#0e0f12;--card:#151821;--stroke:#1b2130;--muted:#aeb3c2;--text:#f6f7fb;--accent:#7fe8ff;--accentHi:#a8f3ff;}
-    .services-section{padding:72px 16px;background:var(--bg);}
-    .sv-container{max-width:1160px;margin:0 auto;}
-    .sv-header{text-align:center;margin-bottom:28px}
-    .sv-eyebrow{letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font:600 12px/1.2 system-ui,Arial}
-    .sv-title{margin:.35rem 0 .35rem;color:var(--text);font:700 40px/1.1 system-ui,Arial}
-    .sv-sub{color:var(--muted);max-width:720px;margin:0 auto 12px;font:400 16px/1.6 system-ui,Arial}
-
-    .sv-grid{display:grid;gap:16px;margin-top:18px}
-    @media (min-width:640px){.sv-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
-    @media (min-width:960px){.sv-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
-
-    .sv-card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
-      border:1px solid var(--stroke);border-radius:16px;padding:20px;min-height:158px;color:var(--text);
-      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;outline:none;position:relative;isolation:isolate}
-    .sv-card:before{content:"";position:absolute;inset:-1px;border-radius:16px;pointer-events:none;
-      background:radial-gradient(120px 60px at 15% 0%,rgba(127,232,255,.25),transparent 60%);}
-    .sv-card:hover,.sv-card:focus{transform:translateY(-4px);
-      border-color:rgba(127,232,255,.55);box-shadow:0 8px 28px rgba(0,0,0,.35);}
-    .sv-icon{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;margin-bottom:10px;
-      color:var(--accent);background:rgba(127,232,255,.08);border:1px solid rgba(127,232,255,.25)}
-    .sv-card-title{margin:2px 0 6px;font:700 18px/1.3 system-ui,Arial;color:var(--text)}
-    .sv-card-text{margin:0;color:var(--muted);font:400 14px/1.6 system-ui,Arial}
-
-    .sv-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:24px;
-      background:rgba(127,232,255,.06);border:1px dashed rgba(127,232,255,.3);padding:16px;border-radius:14px}
-    .sv-cta-text{margin:0;color:var(--muted);font:500 14px/1.6 system-ui,Arial}
-    .sv-button{display:inline-block;padding:10px 16px;border-radius:10px;background:linear-gradient(180deg,var(--accent),var(--accentHi));
-      color:#081016;text-decoration:none;font:700 14px/1 system-ui,Arial;border:0}
-    .sv-button:hover{filter:brightness(1.05)}
-  </style>
-</section>
-<!-- END:SERVICES -->
+    .services-header {
+        flex-direction: column;
+        gap: 32px;
+    }
     
-<!-- START:FINAL-CTA -->
-<section class="final-cta" aria-labelledby="cta-title">
-  <div class="cta-glass">
-    <h2 id="cta-title" class="cta-title">Let’s build something that sells itself.</h2>
-    <p class="cta-sub">Send a note—we’ll reply with a quick strategy take.</p>
-
-    <a class="cta-button" href="mailto:contact@celestia.studio" aria-label="Email Celestia">
-      <span>contact@celestia.studio</span>
-      <!-- arrow -->
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M5 12h12M13 6l6 6-6 6" stroke="#081016" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-
-    <ul class="cta-points" role="list">
-      <li>Conversion-first websites</li>
-      <li>Clear brand systems</li>
-      <li>Search & local visibility</li>
-    </ul>
-
-    <!-- decorative reactive orb -->
-    <span class="cta-orb" aria-hidden="true"></span>
-  </div>
-
-  <style>
-    .final-cta{
-      --bg:#0e0f12; --glass:#10131a; --stroke:#1b2130; --muted:#aeb3c2; --text:#f6f7fb;
-      --accent:#7fe8ff; --accentHi:#a8f3ff;
-      padding:80px 16px 32px; background:var(--bg); position:relative;
+    .services-arrows {
+        transform: rotate(90deg);
     }
-    .final-cta:before{
-      content:""; position:absolute; inset:0 0 auto 0; height:1px;
-      background:radial-gradient(60% 100% at 50% 0, rgba(127,232,255,.35), transparent 70%);
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
-    .cta-glass{
-      max-width:1000px; margin:0 auto; text-align:center; position:relative;
-      border:1px solid rgba(127,232,255,.25);
-      border-radius:22px; padding:36px 20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
-      box-shadow:0 20px 50px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
-      overflow:hidden;
-      /* glass */
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-    }
-    /* subtle reactive highlight */
-    .cta-orb{
-      position:absolute; width:320px; height:320px; border-radius:50%;
-      background:radial-gradient(circle at 30% 30%, rgba(127,232,255,.35), rgba(127,232,255,.08) 60%, transparent 70%);
-      top:-120px; left:-60px; filter:blur(8px);
-      animation: float 8s ease-in-out infinite alternate;
-      pointer-events:none;
-    }
-    @keyframes float{
-      0%{ transform:translate(0,0) scale(1); opacity:.75;}
-      100%{ transform:translate(40px,10px) scale(1.05); opacity:.95;}
-    }
+}
 
-    .cta-title{margin:0 0 10px; color:var(--text); font:800 34px/1.15 system-ui,Arial}
-    .cta-sub{margin:0 0 20px; color:var(--muted); font:400 16px/1.7 system-ui,Arial}
-
-    .cta-button{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:14px 20px; border-radius:999px; text-decoration:none; border:0;
-      background:linear-gradient(180deg, var(--accent), var(--accentHi));
-      color:#081016; font:800 14px/1 system-ui,Arial;
-      box-shadow:0 8px 24px rgba(127,232,255,.25);
-      transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+@media (max-width: 480px) {
+    .navbar {
+        width: 90%;
     }
-    .cta-button:hover{ transform:translateY(-2px); filter:brightness(1.06); box-shadow:0 12px 28px rgba(127,232,255,.35);}
-    .cta-button:active{ transform:translateY(0); }
-
-    .cta-points{
-      display:flex; gap:12px; flex-wrap:wrap; justify-content:center;
-      margin:18px 0 0; padding:0; list-style:none;
+    
+    .container {
+        padding: 0 16px;
     }
-    .cta-points li{
-      color:var(--muted); font:600 12.5px/1.3 system-ui,Arial;
-      background:rgba(127,232,255,.06);
-      border:1px dashed rgba(127,232,255,.28);
-      padding:8px 12px; border-radius:10px;
+    
+    .services-section,
+    .explainer-section,
+    .showreel-section,
+    .contact-section {
+        padding: 80px 0;
     }
-    @media (max-width:640px){
-      .cta-title{font-size:28px}
-      .cta-orb{width:240px;height:240px;top:-90px;left:-50px}
-    }
-    /* graceful fallback when no backdrop-filter support */
-    @supports not ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))){
-      .cta-glass{ background:rgba(16,19,26,.85); }
-    }
-  </style>
-</section>
-<!-- END:FINAL-CTA -->
-
-<!-- START:FOOTER (minimal, no duplicate nav) -->
-<footer class="site-footer" aria-labelledby="footer-title">
-  <div class="ft-wrap">
-    <div class="ft-brand">
-      <span class="ft-logo" aria-hidden="true">✦</span>
-      <p id="footer-title" class="ft-name">Celestia</p>
-      <p class="ft-tag">Design for the new digital era.</p>
-    </div>
-
-    <a class="ft-mail" href="mailto:contact@celestia.studio">contact@celestia.studio</a>
-
-    <div class="ft-social">
-      <!-- replace # with actual links or remove block -->
-      <a href="#" aria-label="Instagram">IG</a>
-      <a href="#" aria-label="LinkedIn">LN</a>
-      <a href="#" aria-label="X / Twitter">X</a>
-    </div>
-  </div>
-
-  <div class="ft-bottom">© <span id="year"></span> Celestia. rightsreserved.</div>
-
-  <style>
-    .site-footer{--bg:#0b0c10; --text:#c8cbd6; --muted:#8e94a7; --stroke:#161b26;
-      padding:28px 16px 40px; background:var(--bg)}
-    .ft-wrap{max-width:1040px; margin:0 auto; display:grid; gap:14px; align-items:center;
-      grid-template-columns:1fr auto auto}
-    .ft-brand{display:flex; align-items:center; gap:10px}
-    .ft-logo{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;background:#10131a;
-      border:1px solid var(--stroke); color:#7fe8ff; font-weight:700}
-    .ft-name{margin:0; color:#f6f7fb; font:700 16px/1 system-ui,Arial}
-    .ft-tag{margin:0 0 0 8px; color:var(--muted); font:400 12px/1.3 system-ui,Arial}
-    .ft-mail{justify-self:center; color:#7fe8ff; text-decoration:none; font:700 13px/1 system-ui,Arial}
-    .ft-mail:hover{color:#a8f3ff}
-    .ft-social{display:flex; gap:10px; justify-self:end}
-    .ft-social a{color:#aeb3c2; text-decoration:none; font:600 12px/1 system-ui,Arial; border:1px solid var(--stroke);
-      padding:6px 8px; border-radius:8px}
-    .ft-social a:hover{color:#fff; border-color:#273045}
-    .ft-bottom{text-align:center; margin-top:18px; color:#6f768a; font:500 12px/1.3 system-ui,Arial}
-    @media (max-width:800px){
-      .ft-wrap{grid-template-columns:1fr; justify-items:center; text-align:center}
-      .ft-mail{justify-self:center}
-      .ft-social{justify-self:center}
-      .ft-tag{margin:4px 0 0}
-    }
-  </style>
-  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
-</footer>
-<!-- END:FOOTER -->
-
-    <script src="script.js"></script>
-</body>
-</html>
+}
