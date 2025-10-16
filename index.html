@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestia — Design that makes buying effortless</title>
-    <meta name="description" content="We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices.">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Celestia — Design that makes buying effortless">
-    <meta property="og:description" content="Launch a site that looks incredible and sells the story in seconds.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="./assets/og.jpg">
-    <meta property="og:url" content="https://celestia.studio">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Three.js for 3D Arrow -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-    
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celestia - Frosted Glass Navbar</title>
+  <link rel="stylesheet" href="styles_glass.css" />
 </head>
 <body>
-  <!-- Liquid Glass Pill Navbar -->
+  <!-- SVG Filter -->
+  <svg width="0" height="0" style="position: absolute;">
+    <defs>
+      <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence 
+          type="fractalNoise" 
+          baseFrequency="0.025 0.025"
+          numOctaves="2" 
+          seed="92" 
+          result="noise" 
+        />
+        <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+        <feDisplacementMap 
+          in="SourceGraphic" 
+          in2="blurred" 
+          scale="100"
+          xChannelSelector="R" 
+          yChannelSelector="G" 
+        />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Frosted Glass Navbar -->
   <nav class="liquid-navbar">
     <div class="liquid-bg"></div>
     <ul class="nav-links">
@@ -40,124 +41,8 @@
     </ul>
   </nav>
 
-  <!-- Frosted Ripple Filter -->
-  <svg width="0" height="0" style="position:absolute;">
-    <defs>
-      <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.018 0.02" numOctaves="2" seed="92" result="noise" />
-        <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
-        <feDisplacementMap in="SourceGraphic" in2="blurred" scale="85" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
-
-    <!-- Navigation -->
-    
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <video class="hero-video" autoplay muted loop playsinline poster="./assets/hero.jpg">
-            <source src="./assets/hero.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <!-- Logo removed from hero section -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Agency Description Section -->
-    <section id= "about" class="agency-section">
-        <div class="container">
-            <div class="agency-content">
-                <div class="agency-arrow">
-                    <!-- Interactive 3D Arrow -->
-                    <div id="arrow-container"></div>
-                </div>
-                <div class="agency-text">
-                    <h1 class="agency-title">WE ARE A FULL STACK</h1>
-                    <h2 class="agency-subtitle">Creative Agency</h2>
-                    <p class="agency-description">
-                        We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Showreel Section -->
-    <section class="showreel-section">
-        <div class="container">
-            <div class="showreel-content">
-                <div class="showreel-left">
-                    <h2 class="showreel-title">
-                        <span class="our-text">OUR</span><br>
-                        <span class="showreel-text">Showreel</span>
-                    </h2>
-                    <p class="showreel-description">
-                        Atmosphere. Scale. Detail. We design digital moments that feel alive—stunning visuals with a purpose: to frame your story, focus attention, and move people to act.
-
-                        Fast-loading, cinematic visuals with clean UX
-                        Crafted for performance, accessibility, and SEO
-                        Built to convert: clear narrative, decisive calls-to-action
-                    </p>
-                </div>
-                <div class="showreel-right">
-                    <div class="video-container">
-                        <video class="showreel-video" muted loop playsinline>
-                            <source src="./assets/showreel.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="play-button-overlay" id="play-button">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="services-title">
-                <span class="services-our">OUR</span>
-                <span class="services-main">Services</span>
-            </h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Site Launchpad</h3>
-                    <p>Conversion-first websites with analytics wired in from day one. Fast-loading, responsive designs that capture attention and drive action.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Brand Starter</h3>
-                    <p>Logo lockup, type & color system, voice and tone guardrails. Complete brand identity that resonates with your target audience.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Presence & Local</h3>
-                    <p>Search, listings, and review engines so the right people find you. Local SEO optimization and digital presence management.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="contact-content">
-                <h3>Let's build something that sells itself.</h3>
-                <p>Drop a note and we'll share a fast strategy take.</p>
-                <a href="mailto:contact@celestia.studio" class="contact-btn">contact@celestia.studio</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; <span id="year"></span> Celestia • Creative Agency</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+  <section style="height:200vh; background:linear-gradient(to bottom, #071a1c, #0e2024);">
+    <h1 style="color:white; padding:200px;">Scroll Test Area</h1>
+  </section>
 </body>
 </html>
