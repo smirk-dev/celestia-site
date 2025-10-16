@@ -731,7 +731,7 @@ body {
 }
 
 
-/* Frosted Navbar with Ice Ripple Effect */
+/* Frosted Navbar - Ice Ripple Effect */
 .frosted-navbar {
   position: fixed;
   top: 20px;
@@ -740,14 +740,14 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding: 12px 40px;
-  border-radius: 18px;
-  overflow: hidden;
-  z-index: 1000;
+  border-radius: 50px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+  z-index: 1000;
+  overflow: hidden;
   transition: all 0.3s ease;
 }
 
@@ -763,14 +763,25 @@ body {
   pointer-events: none;
 }
 
+.frosted-navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.03);
+  z-index: 1;
+  pointer-events: none;
+}
+
 .frosted-navbar .nav-links {
   list-style: none;
   display: flex;
   gap: 40px;
-  margin: 0;
   padding: 0;
+  margin: 0;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .frosted-navbar .nav-links li a {
@@ -778,8 +789,8 @@ body {
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  letter-spacing: 0.8px;
   font-size: 14px;
+  letter-spacing: 0.8px;
   padding: 10px 22px;
   border-radius: 30px;
   background: rgba(255, 255, 255, 0.06);
@@ -791,4 +802,9 @@ body {
   background: rgba(255, 255, 255, 0.18);
   box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.25), 0 0 8px rgba(255, 255, 255, 0.15);
   transform: translateY(-1px);
+}
+
+/* Keep navbar fixed on scroll */
+body {
+  padding-top: 100px;
 }
