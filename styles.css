@@ -731,38 +731,44 @@ body {
 }
 
 
-/* Frosted Navbar - Ice Ripple Effect */
+/* ============================= */
+/* Frosted Navbar - Premium Glass */
+/* ============================= */
 .frosted-navbar {
   position: fixed;
-  top: 20px;
-  left: 40px;
+  top: 28px;
+  left: 48px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 12px 40px;
+  padding: 14px 46px;
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
-  z-index: 1000;
+  box-shadow: 0 6px 25px rgba(255, 255, 255, 0.15);
   overflow: hidden;
-  transition: all 0.3s ease;
+  isolation: isolate;
+  z-index: 1000;
+  width: fit-content;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
 }
 
+/* Ripple distortion background */
 .frosted-navbar::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: rgba(255, 255, 255, 0.05);
   filter: url(#ice-ripple);
   -webkit-filter: url(#ice-ripple);
+  background: rgba(255, 255, 255, 0.06);
   z-index: 0;
   pointer-events: none;
 }
 
+/* Subtle depth highlight */
 .frosted-navbar::before {
   content: '';
   position: absolute;
@@ -774,37 +780,38 @@ body {
   pointer-events: none;
 }
 
+/* Inner link container */
 .frosted-navbar .nav-links {
   list-style: none;
   display: flex;
-  gap: 40px;
-  padding: 0;
+  gap: 42px;
   margin: 0;
+  padding: 0;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
+/* Navigation Links */
 .frosted-navbar .nav-links li a {
   text-decoration: none;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 14px;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.7px;
   padding: 10px 22px;
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.07);
+  transition: all 0.25s ease;
 }
 
 .frosted-navbar .nav-links li a:hover {
   background: rgba(255, 255, 255, 0.18);
-  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.25), 0 0 8px rgba(255, 255, 255, 0.15);
   transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
 }
 
-/* Keep navbar fixed on scroll */
+/* Keep fixed position on scroll */
 body {
-  padding-top: 100px;
+  padding-top: 120px;
 }
