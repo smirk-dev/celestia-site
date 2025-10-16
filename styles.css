@@ -101,7 +101,7 @@ body {
   padding: 0 24px;
 }
 
-/* Frosted Navbar with Subtle Ice Ripple (Background Only) */
+/* Frosted Navbar with True Liquid Glass Effect */
 .frosted-navbar {
   position: fixed;
   top: 20px;
@@ -113,28 +113,40 @@ body {
   border-radius: 18px;
   overflow: hidden;
   z-index: 1000;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.06);
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.08);
+  position: relative;
 }
 
-/* Frosted ripple layer behind navbar content */
-.frosted-navbar::before {
+/* Distortion Layer (only affects background, not text) */
+.frosted-navbar::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: inherit;
+  z-index: 0;
+  background: rgba(255, 255, 255, 0.05);
   filter: url(#ice-ripple);
   -webkit-filter: url(#ice-ripple);
-  z-index: 0;
   pointer-events: none;
-  animation: frostFlow 12s infinite linear;
+  isolation: isolate;
 }
 
-/* Navbar links */
+/* Tint & inner shadow (adds glass depth) */
+.frosted-navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+/* Navbar links stay crisp above distortion */
 .frosted-navbar .nav-links {
   list-style: none;
   display: flex;
@@ -142,57 +154,30 @@ body {
   padding: 0;
   margin: 0;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-/* Neutral white text */
 .frosted-navbar .nav-links li a {
   text-decoration: none;
   font-weight: 600;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.8px;
   padding: 10px 22px;
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.08);
   transition: all 0.3s ease;
   font-size: 14px;
 }
 
 .frosted-navbar .nav-links li a:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.18);
   color: #ffffff;
-  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.15),
-              0 0 8px rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 0 14px rgba(255, 255, 255, 0.3),
+    0 0 10px rgba(255, 255, 255, 0.15);
   transform: translateY(-1px);
-}
-
-@keyframes frostFlow {
-  0%, 100% { filter: url(#ice-ripple); }
-  50% { filter: url(#ice-ripple); }
-}
-
-/* Legacy Navbar (kept hidden) */
-.navbar {
-  display: none;
-}
-
-/* Interactive 3D Arrow */
-#arrow-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 999;
-}
-
-#arrow-container canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 /* Hero Section */
@@ -213,26 +198,6 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 1;
-}
-
-@media (max-width: 768px) {
-  .hero-video {
-    transform: scale(0.95);
-    width: 105.26%;
-    height: 105.26%;
-    top: -2.63%;
-    left: -2.63%;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-video {
-    transform: scale(0.92);
-    width: 108.7%;
-    height: 108.7%;
-    top: -4.35%;
-    left: -4.35%;
-  }
 }
 
 .hero-overlay {
@@ -343,47 +308,6 @@ body {
 .showreel-video:hover {
   transform: scale(1.02);
   box-shadow: 0 25px 50px rgba(107, 255, 250, 0.2);
-}
-
-.play-button-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
-  background: transparent;
-  border: 3px solid rgba(107, 255, 250, 0.8);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  box-shadow:
-    0 8px 32px rgba(107, 255, 250, 0.2),
-    inset 0 0 0 0 rgba(107, 255, 250, 0.1);
-  z-index: 2;
-}
-
-.play-button-overlay:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-  border-color: rgba(107, 255, 250, 1);
-  background: rgba(107, 255, 250, 0.1);
-  box-shadow:
-    0 12px 48px rgba(107, 255, 250, 0.4),
-    inset 0 0 0 1px rgba(107, 255, 250, 0.2);
-}
-
-.play-button-overlay::before {
-  content: '';
-  width: 0;
-  height: 0;
-  border-left: 20px solid rgba(107, 255, 250, 0.9);
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  margin-left: 4px;
 }
 
 /* Services Section */
@@ -536,64 +460,7 @@ body {
   font-size: 14px;
 }
 
-/* Fullscreen Video Overlay */
-.fullscreen-video-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.95);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-  backdrop-filter: blur(10px);
-}
-
-.fullscreen-video-container {
-  position: relative;
-  width: 90vw;
-  height: 90vh;
-  max-width: 1200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.fullscreen-video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.close-fullscreen {
-  position: absolute;
-  top: -50px;
-  right: -10px;
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  font-size: 48px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 300;
-  line-height: 1;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.close-fullscreen:hover {
-  color: var(--accent-blue);
-  transform: scale(1.1);
-}
-
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   .frosted-navbar {
     left: 20px;
@@ -601,30 +468,12 @@ body {
     width: auto;
     padding: 8px 20px;
   }
-
   .frosted-navbar .nav-links {
     gap: 20px;
   }
-
   .frosted-navbar .nav-links li a {
     padding: 8px 16px;
     font-size: 12px;
-  }
-
-  .agency-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 40px;
-  }
-
-  .showreel-content {
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
   }
 }
 
@@ -638,11 +487,11 @@ body {
     right: 16px;
     padding: 6px 16px;
   }
-
+  
   .frosted-navbar .nav-links {
     gap: 16px;
   }
-
+  
   .frosted-navbar .nav-links li a {
     padding: 6px 12px;
     font-size: 11px;
