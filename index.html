@@ -1,232 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestia</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <meta property="og:title" content="Celestia - Creative Agency">
-    <meta property="og:description" content="We are a full stack creative agency">
-    <meta property="og:image" content="./assets/og.jpg">
-    <meta property="og:url" content="https://celestia.studio">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celestia</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <meta property="og:title" content="Celestia - Creative Agency" />
+  <meta property="og:description" content="We are a full stack creative agency" />
+  <meta property="og:image" content="./assets/og.jpg" />
+  <meta property="og:url" content="https://celestia.studio" />
 </head>
+
 <body>
-    <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
 
-    <!-- SVG Filter for Ice Ripple Effect -->
-    <svg width="0" height="0" style="position: absolute;">
-        <defs>
-            <filter id="ice-ripple" x="0%" y="0%" width="100%" height="100%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.015 0.025" numOctaves="2" seed="8" result="noise" />
-                <feGaussianBlur in="noise" stdDeviation="1.5" result="blurred" />
-                <feDisplacementMap in="SourceGraphic" in2="blurred" scale="55" xChannelSelector="R" yChannelSelector="G" />
-            </filter>
-        </defs>
-    </svg>
+  <!-- SVG Filter for Ice Ripple Effect -->
+  <svg width="0" height="0" style="position: absolute;">
+    <defs>
+      <filter id="ice-ripple" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence 
+          type="fractalNoise" 
+          baseFrequency="0.02 0.03"
+          numOctaves="2"
+          seed="8"
+          result="noise" />
+        <feGaussianBlur 
+          in="noise" 
+          stdDeviation="0.6" 
+          result="blurred" />
+        <feDisplacementMap 
+          in="SourceGraphic" 
+          in2="blurred" 
+          scale="5"
+          xChannelSelector="R"
+          yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
 
-    <!-- Interactive 3D Arrow -->
-    <div id="arrow-container"></div>
+  <!-- Interactive 3D Arrow -->
+  <div id="arrow-container"></div>
 
-    <!-- Navigation (UPDATED SECTION) -->
-    <nav class="frosted-navbar">
-        <ul class="nav-links">
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#services">SERVICES</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-        </ul>
-    </nav>
+  <!-- Frosted Navbar -->
+  <nav class="frosted-navbar">
+    <ul class="nav-links">
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#services">SERVICES</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <video class="hero-video" autoplay muted loop playsinline poster="./assets/hero.jpg">
-            <source src="./assets/hero.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <h1 class="agency-title">WE ARE A FULL STACK</h1>
-                <h2 class="agency-subtitle">Creative Agency</h2>
-                <p class="agency-description">
-                    We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Agency Section -->
-    <section class="agency-section">
-        <div class="container">
-            <div class="agency-content">
-                <div class="agency-arrow">
-                    <div id="arrow-container">
-                        <canvas></canvas>
-                    </div>
-                </div>
-                <div class="agency-text">
-                    <h3 class="our-text">OUR</h3>
-                    <h2 class="showreel-text">Showreel</h2>
-                    <p class="showreel-description">
-                        Atmosphere. Scale. Detail. We design digital moments that feel alive—stunning visuals with a purpose: to frame your story, focus attention, and move people to act.
-                    </p>
-                    <ul>
-                        <li>Fast-loading, cinematic visuals with clean UX</li>
-                        <li>Crafted for performance, accessibility, and SEO</li>
-                        <li>Built to convert: clear narrative, decisive calls-to-action</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Showreel Section -->
-    <section class="showreel-section">
-        <div class="container">
-            <div class="showreel-content">
-                <div class="showreel-title">
-                    <div class="video-container">
-                        <video class="showreel-video" poster="./assets/thumbnail.jpeg">
-                            <source src="./assets/showreel.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="play-button-overlay">
-                            <span></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services-section" id="services">
-        <div class="container">
-            <div class="services-title">
-                <span class="services-our">OUR</span>
-                <span class="services-main">SERVICES</span>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <div class="icon-wrapper">
-                            <div class="icon-content">
-                                <h3>Website Launchpad</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Fast, mobile-first sites wired for conversion and analytics from day one.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <div class="icon-wrapper">
-                            <div class="icon-content">
-                                <h3>Brand Identity Starter</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Logo, color & type system, voice and story—built for recognition and trust.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <div class="icon-wrapper">
-                            <div class="icon-content">
-                                <h3>Local Presence & Visibility</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Search, maps, reviews, and listings—so the right people find you first.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <div class="icon-wrapper">
-                            <div class="icon-content">
-                                <h3>Social Content Engine</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p>On-brand posts, reels, and campaigns that cut through and stay consistent.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <div class="icon-wrapper">
-                            <div class="icon-content">
-                                <h3>3D & Visual Storytelling</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p>High-impact 3D, renders, and motion for products, spaces, and destinations.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <div class="icon-wrapper">
-                            <div class="icon-content">
-                                <h3>Growth & Performance</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Targeted campaigns, tracking, and optimization—design that performs.</p>
-                </div>
-            </div>
-            
-            <div class="services-footer">
-                <p>Not sure which mix fits? We'll tailor it to your goals.</p>
-                <a href="#contact" class="contact-btn">Book a quick call</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section" id="contact">
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-card">
-                    <div class="contact-header">
-                        <h3>Let's build something that sells itself.</h3>
-                    </div>
-                    <div class="contact-body">
-                        <p>Drop a note and we'll share a fast strategy take.</p>
-                    </div>
-                    <div class="contact-footer">
-                        <a href="mailto:contact@celestia.studio" class="contact-btn">contact@celestia.studio</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="#">Conversion-first websites</a></li>
-                        <li><a href="#">Clear brand systems</a></li>
-                        <li><a href="#">Search & local visibility</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Fullscreen Video Overlay -->
-    <div class="fullscreen-video-overlay">
-        <div class="fullscreen-video-container">
-            <video class="fullscreen-video" controls>
-                <source src="./assets/showreel.mp4" type="video/mp4">
-            </video>
-            <button class="close-fullscreen">&times;</button>
-        </div>
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <video class="hero-video" autoplay muted loop playsinline poster="./assets/hero.jpg">
+      <source src="./assets/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h1 class="agency-title">WE ARE A FULL STACK</h1>
+        <h2 class="agency-subtitle">Creative Agency</h2>
+        <p class="agency-description">
+          We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.
+        </p>
+      </div>
     </div>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- Agency Section -->
+  <section class="agency-section" id="about">
+    <div class="container">
+      <div class="agency-content">
+        <div class="agency-arrow">
+          <div id="arrow-container">
+            <canvas></canvas>
+          </div>
+        </div>
+        <div class="agency-text">
+          <h3 class="our-text">OUR</h3>
+          <h2 class="showreel-text">Showreel</h2>
+          <p class="showreel-description">
+            Atmosphere. Scale. Detail. We design digital moments that feel alive—stunning visuals with a purpose: to frame your story, focus attention, and move people to act.
+          </p>
+          <ul>
+            <li>Fast-loading, cinematic visuals with clean UX</li>
+            <li>Crafted for performance, accessibility, and SEO</li>
+            <li>Built to convert: clear narrative, decisive calls-to-action</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showreel Section -->
+  <section class="showreel-section">
+    <div class="container">
+      <div class="showreel-content">
+        <div class="showreel-title">
+          <div class="video-container">
+            <video class="showreel-video" poster="./assets/thumbnail.jpeg">
+              <source src="./assets/showreel.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="play-button-overlay">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="services-title">
+        <span class="services-our">OUR</span>
+        <span class="services-main">SERVICES</span>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Website Launchpad</h3>
+          <p>Fast, mobile-first sites wired for conversion and analytics from day one.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Brand Identity Starter</h3>
+          <p>Logo, color & type system, voice and story—built for recognition and trust.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Local Presence & Visibility</h3>
+          <p>Search, maps, reviews, and listings—so the right people find you first.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Social Content Engine</h3>
+          <p>On-brand posts, reels, and campaigns that cut through and stay consistent.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>3D & Visual Storytelling</h3>
+          <p>High-impact 3D, renders, and motion for products, spaces, and destinations.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Growth & Performance</h3>
+          <p>Targeted campaigns, tracking, and optimization—design that performs.</p>
+        </div>
+      </div>
+
+      <div class="services-footer">
+        <p>Not sure which mix fits? We'll tailor it to your goals.</p>
+        <a href="#contact" class="contact-btn">Book a quick call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="contact-content">
+        <div class="contact-card">
+          <div class="contact-header">
+            <h3>Let's build something that sells itself.</h3>
+          </div>
+          <div class="contact-body">
+            <p>Drop a note and we'll share a fast strategy take.</p>
+          </div>
+          <div class="contact-footer">
+            <a href="mailto:contact@celestia.studio" class="contact-btn">contact@celestia.studio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <ul>
+            <li><a href="#">Conversion-first websites</a></li>
+            <li><a href="#">Clear brand systems</a></li>
+            <li><a href="#">Search & local visibility</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fullscreen Video Overlay -->
+  <div class="fullscreen-video-overlay">
+    <div class="fullscreen-video-container">
+      <video class="fullscreen-video" controls>
+        <source src="./assets/showreel.mp4" type="video/mp4" />
+      </video>
+      <button class="close-fullscreen">&times;</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
