@@ -1,71 +1,80 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celestia</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <meta property="og:title" content="Celestia - Creative Agency">
-    <meta property="og:description" content="We are a full stack creative agency">
+    <meta name="description" content="We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Celestia">
+    <meta property="og:description" content="Launch a site that looks incredible and sells the story in seconds.">
+    <meta property="og:type" content="website">
     <meta property="og:image" content="./assets/og.jpg">
     <meta property="og:url" content="https://celestia.studio">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js for 3D Arrow -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
-
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="nav-links">
-            <a href="#home" class="nav-link active">HOME</a>
-            <a href="#services" class="nav-link">SERVICES</a>
-            <a href="#work" class="nav-link">WORK</a>
-            <a href="#contact" class="nav-link">CONTACT</a>
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="#home" class="nav-link">HOME</a>
+                <a href="#about" class="nav-link">ABOUT</a>
+            </div>
+            <div class="nav-right">
+                <a href="#services" class="nav-link">SERVICES</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
-        <a href="#schedule" class="nav-cta">SCHEDULE A CALL</a>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section" id="home">
-        <div class="hero-background">
-            <video class="hero-video" autoplay muted loop playsinline poster="./assets/hero.jpg">
-                <source src="./assets/hero.mp4" type="video/mp4">
-            </video>
-        </div>
+    <section id="home" class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline poster="./assets/hero.jpg">
+            <source src="./assets/hero.mp4" type="video/mp4">
+        </video>
         <div class="hero-overlay">
             <div class="hero-content">
-                <div class="hero-logo">
-                    <img src="./assets/logo.svg" alt="Celestia" class="logo-icon">
-                </div>
-                <h1 class="brand-name">CELESTIA</h1>
-                <div class="hero-text">
-                    <h2 class="hero-title">WE ARE A FULL STACK</h2>
-                    <h3 class="hero-subtitle">CREATIVE AGENCY</h3>
-                </div>
-                <p class="hero-description">We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices.</p>
-                <div class="hero-tagline">
-                    <span class="tagline-text">WE'RE YOUR</span>
-                    <span class="tagline-highlight">UNFAIR ADVANTAGE</span>
-                </div>
-                <div class="scroll-indicator">SCROLL TO EXPLORE</div>
+                <!-- Logo removed from hero section -->
             </div>
         </div>
     </section>
 
-    <!-- Explainer Section -->
-    <section class="explainer-section">
+    <!-- Agency Description Section -->
+    <section id= "about" class="agency-section">
         <div class="container">
-            <div class="section-content">
-                <div class="text-content">
-                    <h2 class="section-title">THE <span class="highlight">EXPLAINER</span></h2>
-                    <p class="section-description">We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.</p>
+            <div class="agency-content">
+                <div class="agency-arrow">
+                    <!-- Interactive 3D Arrow -->
+                    <div id="arrow-container"></div>
                 </div>
-                <div class="video-content">
-                    <div class="video-container explainer-video">
-                        <div class="play-button">▶</div>
-                    </div>
+                <div class="agency-text">
+                    <h1 class="agency-title">WE ARE A FULL STACK</h1>
+                    <h2 class="agency-subtitle">Creative Agency</h2>
+                    <p class="agency-description">
+                        We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.
+                    </p>
                 </div>
             </div>
         </div>
@@ -74,75 +83,159 @@
     <!-- Showreel Section -->
     <section class="showreel-section">
         <div class="container">
-            <div class="section-content reverse">
-                <div class="video-content">
-                    <div class="video-container showreel-video">
-                        <div class="play-button">▶</div>
+            <div class="showreel-content">
+                <div class="showreel-left">
+                    <h2 class="showreel-title">
+                        <span class="our-text">OUR</span><br>
+                        <span class="showreel-text">Showreel</span>
+                    </h2>
+                    <p class="showreel-description">
+                        Atmosphere. Scale. Detail. We design digital moments that feel alive—stunning visuals with a purpose: to frame your story, focus attention, and move people to act.
+
+                        Fast-loading, cinematic visuals with clean UX
+                        Crafted for performance, accessibility, and SEO
+                        Built to convert: clear narrative, decisive calls-to-action
+                    </p>
+                </div>
+                <div class="showreel-right">
+                    <div class="video-container">
+                        <video class="showreel-video" muted loop playsinline poster="./assets/thumbnail.jpeg">
+                            <source src="./assets/showreel.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="play-button-overlay" id="play-button">
+                        </div>
                     </div>
                 </div>
-                <div class="text-content">
-                    <h2 class="section-title">OUR <span class="highlight">SHOWREEL</span></h2>
-                    <p class="section-description">We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.</p>
-                </div>
             </div>
         </div>
     </section>
+<!-- START:SERVICES -->
+<section class="services-section" id="services" aria-labelledby="services-title">
+  <div class="sv-container">
+    <header class="sv-header">
+      <p class="sv-eyebrow">Our Services</p>
+      <h2 class="sv-title" id="services-title">Built to make you stand out</h2>
+      <p class="sv-sub">Clear packages. Outcome-driven. Designed for the new digital era.</p>
+    </header>
 
-    <!-- Services Section -->
-    <section class="services-section" id="services">
-        <div class="container">
-            <div class="services-header">
-                <div class="services-arrows">
-                    <div class="arrow-left">→</div>
-                </div>
-                <div class="services-title">
-                    <h2 class="section-title">OUR <span class="highlight">SERVICES</span></h2>
-                    <p class="services-subtitle">BUILT TO MAKE YOU STAND OUT</p>
-                    <p class="services-tagline">Clear packages. Outcome-driven. Designed for the new digital era</p>
-                </div>
-                <div class="services-arrows">
-                    <div class="arrow-right">→</div>
-                </div>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Website Launchpad</h3>
-                    <p>Fast, mobile-first sites wired for conversion and analytics from day one.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Brand Identity Starter</h3>
-                    <p>Logo, color & type system, voice and story—built for recognition and trust.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Local Presence & Visibility</h3>
-                    <p>Search, maps, reviews, and listings—so the right people find you first.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Social Content Engine</h3>
-                    <p>On-brand posts, reels, and campaigns that cut through and stay consistent.</p>
-                </div>
-                <div class="service-card">
-                    <h3>3D & Visual Storytelling</h3>
-                    <p>High-impact 3D, renders, and motion for products, spaces, and destinations.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Growth & Performance</h3>
-                    <p>Targeted campaigns, tracking, and optimization—design that performs.</p>
-                </div>
-            </div>
+    <div class="sv-grid" role="list">
+      <!-- 1 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <!-- minimalist spark SVG -->
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 20l-2.2-7.8L4 10l5.8-2.2L12 2z"/></svg>
         </div>
-    </section>
+        <h3 class="sv-card-title">Website Launchpad</h3>
+        <p class="sv-card-text">Fast, mobile-first sites wired for conversion and analytics from day one.</p>
+      </article>
 
+      <!-- 2 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 17l9-12 9 12H3zm9-3l6 8H6l6-8z"/></svg>
+        </div>
+        <h3 class="sv-card-title">Brand Identity Starter</h3>
+        <p class="sv-card-text">Logo, color & type system, voice and story—built for recognition and trust.</p>
+      </article>
+
+      <!-- 3 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5l4 2"/></svg>
+        </div>
+        <h3 class="sv-card-title">Local Presence & Visibility</h3>
+        <p class="sv-card-text">Search, maps, reviews, and listings—so the right people find you first.</p>
+      </article>
+
+      <!-- 4 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 4h16v4H4zm0 6h10v4H4zm0 6h16v4H4z"/></svg>
+        </div>
+        <h3 class="sv-card-title">Social Content Engine</h3>
+        <p class="sv-card-text">On-brand posts, reels, and campaigns that cut through and stay consistent.</p>
+      </article>
+
+      <!-- 5 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg>
+        </div>
+        <h3 class="sv-card-title">3D & Visual Storytelling</h3>
+        <p class="sv-card-text">High-impact 3D, renders, and motion for products, spaces, and destinations.</p>
+      </article>
+
+      <!-- 6 -->
+      <article class="sv-card" role="listitem" tabindex="0">
+        <div class="sv-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 12h6v8H3zm6-8h6v16H9zm6 6h6v10h-6z"/></svg>
+        </div>
+        <h3 class="sv-card-title">Growth & Performance</h3>
+        <p class="sv-card-text">Targeted campaigns, tracking, and optimization—design that performs.</p>
+      </article>
+    </div>
+
+    <!-- CTA bar -->
+    <div class="sv-cta">
+      <p class="sv-cta-text">Not sure which mix fits? We’ll tailor it to your goals.</p>
+      <a class="sv-button" href="mailto:contact@celestia.studio">Book a quick call</a>
+    </div>
+  </div>
+
+  <!-- Scoped styles -->
+  <style>
+    .services-section{--bg:#0e0f12;--card:#151821;--stroke:#1b2130;--muted:#aeb3c2;--text:#f6f7fb;--accent:#7fe8ff;--accentHi:#a8f3ff;}
+    .services-section{padding:72px 16px;background:var(--bg);}
+    .sv-container{max-width:1160px;margin:0 auto;}
+    .sv-header{text-align:center;margin-bottom:28px}
+    .sv-eyebrow{letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font:600 12px/1.2 system-ui,Arial}
+    .sv-title{margin:.35rem 0 .35rem;color:var(--text);font:700 40px/1.1 system-ui,Arial}
+    .sv-sub{color:var(--muted);max-width:720px;margin:0 auto 12px;font:400 16px/1.6 system-ui,Arial}
+
+    .sv-grid{display:grid;gap:16px;margin-top:18px}
+    @media (min-width:640px){.sv-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+    @media (min-width:960px){.sv-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+
+    .sv-card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+      border:1px solid var(--stroke);border-radius:16px;padding:20px;min-height:158px;color:var(--text);
+      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;outline:none;position:relative;isolation:isolate}
+    .sv-card:before{content:"";position:absolute;inset:-1px;border-radius:16px;pointer-events:none;
+      background:radial-gradient(120px 60px at 15% 0%,rgba(127,232,255,.25),transparent 60%);}
+    .sv-card:hover,.sv-card:focus{transform:translateY(-4px);
+      border-color:rgba(127,232,255,.55);box-shadow:0 8px 28px rgba(0,0,0,.35);}
+    .sv-icon{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;margin-bottom:10px;
+      color:var(--accent);background:rgba(127,232,255,.08);border:1px solid rgba(127,232,255,.25)}
+    .sv-card-title{margin:2px 0 6px;font:700 18px/1.3 system-ui,Arial;color:var(--text)}
+    .sv-card-text{margin:0;color:var(--muted);font:400 14px/1.6 system-ui,Arial}
+
+    .sv-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin-top:24px;
+      background:rgba(127,232,255,.06);border:1px dashed rgba(127,232,255,.3);padding:16px;border-radius:14px}
+    .sv-cta-text{margin:0;color:var(--muted);font:500 14px/1.6 system-ui,Arial}
+    .sv-button{display:inline-block;padding:10px 16px;border-radius:10px;background:linear-gradient(180deg,var(--accent),var(--accentHi));
+      color:#081016;text-decoration:none;font:700 14px/1 system-ui,Arial;border:0}
+    .sv-button:hover{filter:brightness(1.05)}
+  </style>
+</section>
+<!-- END:SERVICES -->
+    
     <!-- Contact Section -->
-    <section class="contact-section" id="contact">
+    <section id="contact" class="contact-section">
         <div class="container">
-            <div class="contact-card">
-                <h2 class="contact-title">LET'S BUILD SOMETHING THAT SELLS ITSELF</h2>
-                <p class="contact-subtitle">Send a note—we'll reply with a quick strategy take.</p>
-                <a href="mailto:contact@celestia.studio" class="contact-email">CONTACT@CELESTIA.STUDIO</a>
+            <div class="contact-content">
+                <h3>Let's build something that sells itself.</h3>
+                <p>Drop a note and we'll share a fast strategy take.</p>
+                <a href="mailto:contact@celestia.studio" class="contact-btn">contact@celestia.studio</a>
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="year"></span> Celestia • Creative Agency</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
