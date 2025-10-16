@@ -1,70 +1,235 @@
+/* =============================
+   BASE RESET & GLOBAL VARIABLES
+   ============================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #0b1719;
-  overflow-x: hidden;
+
+:root {
+  --bg-primary: #0E0F12;
+  --bg-secondary: #1a1d23;
+  --bg-card: #0f1115;
+  --text-primary: #ffffff;
+  --text-secondary: #b8bcc8;
+  --accent-blue: #6BFFFA;
+  --border-color: #2a2d35;
 }
 
-/* Frosted Glass Navbar */
-.liquid-navbar {
+/* =============================
+   BODY & TYPOGRAPHY
+   ============================= */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =============================
+   CUSTOM CURSOR
+   ============================= */
+.custom-cursor {
   position: fixed;
-  top: 25px;
-  left: 50px;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(107, 255, 250, 0.8) 0%, rgba(107, 255, 250, 0.4) 40%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+}
+
+/* =============================
+   FROSTED NAVBAR (FINAL BUILD)
+   ============================= */
+.frosted-navbar {
+  position: fixed;
+  top: 24px;
+  left: 40px;
+  padding: 10px 40px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  filter: url(#glass-distortion);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.25),
+              0 4px 25px rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.frosted-navbar .nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.frosted-navbar .nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.frosted-navbar .nav-links li a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--accent-blue);
+}
+
+/* =============================
+   HERO SECTION
+   ============================= */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 40px;
-  border-radius: 40px;
-  z-index: 1000;
-  width: fit-content;
-  height: 64px;
-  overflow: hidden;
-  box-shadow: 0 4px 25px rgba(255,255,255,0.05);
-  isolation: isolate;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 
-.liquid-navbar .liquid-bg {
-  content: '';
+.hero-video {
   position: absolute;
-  inset: 0;
-  border-radius: 40px;
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 0 18px rgba(255,255,255,0.15);
-  filter: url(#glass-distortion);
-  -webkit-filter: url(#glass-distortion);
-  pointer-events: none;
-  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
-.liquid-navbar .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 38px;
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
   z-index: 2;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.liquid-navbar .nav-links li a {
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 14px;
-  color: #ffffff;
-  padding: 10px 22px;
-  border-radius: 30px;
+.hero-content {
+  text-align: center;
+  z-index: 3;
+}
+
+.agency-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--text-secondary);
+}
+
+.agency-subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: bold;
+  color: var(--accent-blue);
+  margin-bottom: 30px;
+}
+
+.agency-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* =============================
+   SECTION STYLING
+   ============================= */
+.agency-section, .showreel-section, .services-section, .contact-section {
+  padding: 120px 0;
+}
+
+.showreel-section {
+  background: var(--bg-secondary);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+}
+
+.service-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 40px;
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
-  letter-spacing: 1px;
-  background: rgba(255,255,255,0.06);
-  box-shadow: inset 0 0 8px rgba(255,255,255,0.12);
 }
 
-.liquid-navbar .nav-links li a:hover {
-  background: rgba(255,255,255,0.18);
-  box-shadow: inset 0 0 12px rgba(255,255,255,0.25), 0 0 8px rgba(255,255,255,0.1);
-  transform: translateY(-1px);
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 10px 30px rgba(107, 255, 250, 0.2);
+}
+
+/* =============================
+   CONTACT & FOOTER
+   ============================= */
+.contact-section {
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.contact-btn {
+  display: inline-block;
+  background: var(--accent-blue);
+  color: var(--bg-primary);
+  padding: 18px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(107, 255, 250, 0.4);
+}
+
+.footer {
+  padding: 60px 0;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* =============================
+   RESPONSIVE ADJUSTMENTS
+   ============================= */
+@media (max-width: 768px) {
+  .frosted-navbar {
+    left: 20px;
+    right: 20px;
+    width: auto;
+    justify-content: center;
+  }
+
+  .frosted-navbar .nav-links {
+    gap: 16px;
+  }
 }
