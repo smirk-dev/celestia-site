@@ -1,495 +1,149 @@
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Celestia - Creative Agency">
+    <meta property="og:description" content="We are a full stack creative agency">
+    <meta property="og:image" content="./assets/og.jpg">
+    <meta property="og:url" content="https://celestia.studio">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
 
-/* Custom Cursor */
-html, body {
-    cursor: none;
-}
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#home" class="nav-link active">HOME</a>
+            <a href="#services" class="nav-link">SERVICES</a>
+            <a href="#work" class="nav-link">WORK</a>
+            <a href="#contact" class="nav-link">CONTACT</a>
+        </div>
+        <a href="#schedule" class="nav-cta">SCHEDULE A CALL</a>
+    </nav>
 
-.custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(circle, rgba(83, 245, 255, 0.8) 0%, rgba(83, 245, 255, 0.4) 40%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    will-change: transform;
-    box-shadow: 0 0 10px rgba(83, 245, 255, 0.6), 0 0 20px rgba(83, 245, 255, 0.4);
-    transition: transform 0.1s ease;
-}
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-background">
+            <video class="hero-video" autoplay muted loop playsinline poster="./assets/hero.jpg">
+                <source src="./assets/hero.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <img src="./assets/logo.svg" alt="Celestia" class="logo-icon">
+                </div>
+                <h1 class="brand-name">CELESTIA</h1>
+                <div class="hero-text">
+                    <h2 class="hero-title">WE ARE A FULL STACK</h2>
+                    <h3 class="hero-subtitle">CREATIVE AGENCY</h3>
+                </div>
+                <p class="hero-description">We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices.</p>
+                <div class="hero-tagline">
+                    <span class="tagline-text">WE'RE YOUR</span>
+                    <span class="tagline-highlight">UNFAIR ADVANTAGE</span>
+                </div>
+                <div class="scroll-indicator">SCROLL TO EXPLORE</div>
+            </div>
+        </div>
+    </section>
 
-/* Fonts */
-@font-face {
-    font-family: 'Bahnschrift';
-    src: url('./assets/BAHNSCHRIFT.TTF') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+    <!-- Explainer Section -->
+    <section class="explainer-section">
+        <div class="container">
+            <div class="section-content">
+                <div class="text-content">
+                    <h2 class="section-title">THE <span class="highlight">EXPLAINER</span></h2>
+                    <p class="section-description">We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.</p>
+                </div>
+                <div class="video-content">
+                    <div class="video-container explainer-video">
+                        <div class="play-button">▶</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-/* Root Variables */
-:root {
-    --bg-primary: #0a0f14;
-    --bg-secondary: #0e1318;
-    --bg-card: rgba(14, 19, 24, 0.7);
-    --text-primary: #ffffff;
-    --text-secondary: #b8bcc8;
-    --text-muted: #6b7280;
-    --accent-cyan: #53f5ff;
-    --accent-cyan-dark: #29daef;
-    --accent-glow: rgba(83, 245, 255, 0.3);
-    --glass-bg: rgba(14, 17, 24, 0.7);
-    --glass-border: rgba(83, 245, 255, 0.1);
-    --blur: blur(20px);
-    --pill-radius: 30px;
-}
+    <!-- Showreel Section -->
+    <section class="showreel-section">
+        <div class="container">
+            <div class="section-content reverse">
+                <div class="video-content">
+                    <div class="video-container showreel-video">
+                        <div class="play-button">▶</div>
+                    </div>
+                </div>
+                <div class="text-content">
+                    <h2 class="section-title">OUR <span class="highlight">SHOWREEL</span></h2>
+                    <p class="section-description">We combine creative design and the latest AI-driven techniques. You get beautiful, custom branding and websites, plus advanced optimization so your business is found not just by people, but by the AI assistants that now guide customer choices. We handle everything—from how your brand looks, to how it's selected and recommended in today's digital landscape.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-html {
-    scroll-behavior: smooth;
-}
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="services-header">
+                <div class="services-arrows">
+                    <div class="arrow-left">→</div>
+                </div>
+                <div class="services-title">
+                    <h2 class="section-title">OUR <span class="highlight">SERVICES</span></h2>
+                    <p class="services-subtitle">BUILT TO MAKE YOU STAND OUT</p>
+                    <p class="services-tagline">Clear packages. Outcome-driven. Designed for the new digital era</p>
+                </div>
+                <div class="services-arrows">
+                    <div class="arrow-right">→</div>
+                </div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Website Launchpad</h3>
+                    <p>Fast, mobile-first sites wired for conversion and analytics from day one.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Brand Identity Starter</h3>
+                    <p>Logo, color & type system, voice and story—built for recognition and trust.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Local Presence & Visibility</h3>
+                    <p>Search, maps, reviews, and listings—so the right people find you first.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Social Content Engine</h3>
+                    <p>On-brand posts, reels, and campaigns that cut through and stay consistent.</p>
+                </div>
+                <div class="service-card">
+                    <h3>3D & Visual Storytelling</h3>
+                    <p>High-impact 3D, renders, and motion for products, spaces, and destinations.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Growth & Performance</h3>
+                    <p>Targeted campaigns, tracking, and optimization—design that performs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #0a0f14 0%, #0e1318 50%, #0a1a1e 100%);
-    color: var(--text-primary);
-    line-height: 1.6;
-    overflow-x: hidden;
-    min-height: 100vh;
-}
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-card">
+                <h2 class="contact-title">LET'S BUILD SOMETHING THAT SELLS ITSELF</h2>
+                <p class="contact-subtitle">Send a note—we'll reply with a quick strategy take.</p>
+                <a href="mailto:contact@celestia.studio" class="contact-email">CONTACT@CELESTIA.STUDIO</a>
+            </div>
+        </div>
+    </section>
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-/* Navigation */
-.navbar {
-    position: fixed;
-    top: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--glass-bg);
-    backdrop-filter: var(--blur);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--pill-radius);
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 48px;
-    z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.nav-links {
-    display: flex;
-    gap: 32px;
-    align-items: center;
-}
-
-.nav-link {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-    letter-spacing: 0.5px;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.nav-cta {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-cyan-dark) 100%);
-    color: #0a0f14;
-    padding: 10px 24px;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 16px rgba(83, 245, 255, 0.3);
-}
-
-.nav-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(83, 245, 255, 0.5);
-}
-
-/* Hero Section */
-.hero-section {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.hero-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero-overlay {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    max-width: 800px;
-    padding: 0 24px;
-}
-
-.hero-logo {
-    margin-bottom: 24px;
-}
-
-.logo-icon {
-    width: 120px;
-    height: auto;
-    filter: drop-shadow(0 0 20px rgba(83, 245, 255, 0.5));
-}
-
-.brand-name {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 32px;
-    letter-spacing: 4px;
-}
-
-.hero-title {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 8px;
-    letter-spacing: 2px;
-}
-
-.hero-subtitle {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    color: var(--accent-cyan);
-    margin-bottom: 24px;
-    letter-spacing: 2px;
-    text-shadow: 0 0 30px rgba(83, 245, 255, 0.5);
-}
-
-.hero-description {
-    font-size: 16px;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 48px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero-tagline {
-    margin-bottom: 48px;
-}
-
-.tagline-text {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 600;
-    color: var(--text-primary);
-    display: block;
-    margin-bottom: 8px;
-}
-
-.tagline-highlight {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 700;
-    color: var(--accent-cyan);
-    text-shadow: 0 0 20px rgba(83, 245, 255, 0.5);
-}
-
-.scroll-indicator {
-    font-size: 12px;
-    color: var(--text-muted);
-    letter-spacing: 2px;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-}
-
-/* Section Styles */
-.explainer-section,
-.showreel-section {
-    padding: 120px 0;
-    background: var(--bg-secondary);
-}
-
-.section-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.section-content.reverse {
-    grid-template-columns: 1fr 1fr;
-}
-
-.section-title {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 24px;
-    letter-spacing: 1px;
-}
-
-.highlight {
-    color: var(--accent-cyan);
-    text-shadow: 0 0 20px rgba(83, 245, 255, 0.5);
-}
-
-.section-description {
-    font-size: 16px;
-    color: var(--text-secondary);
-    line-height: 1.8;
-}
-
-.video-container {
-    background: var(--glass-bg);
-    backdrop-filter: var(--blur);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--pill-radius);
-    padding: 80px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.video-container:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 48px rgba(83, 245, 255, 0.2);
-}
-
-.play-button {
-    font-size: 48px;
-    color: var(--accent-cyan);
-    filter: drop-shadow(0 0 20px rgba(83, 245, 255, 0.5));
-}
-
-/* Services Section */
-.services-section {
-    padding: 120px 0;
-    background: var(--bg-primary);
-}
-
-.services-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 80px;
-    margin-bottom: 80px;
-    text-align: center;
-}
-
-.services-arrows {
-    font-size: 48px;
-    color: var(--text-secondary);
-}
-
-.services-title .section-title {
-    margin-bottom: 16px;
-}
-
-.services-subtitle {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.services-tagline {
-    font-size: 14px;
-    color: var(--text-secondary);
-}
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.service-card {
-    background: var(--glass-bg);
-    backdrop-filter: var(--blur);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--pill-radius);
-    padding: 32px 24px;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-}
-
-.service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(83, 245, 255, 0.1);
-    border-color: var(--accent-cyan);
-}
-
-.service-card h3 {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 12px;
-}
-
-.service-card p {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-/* Contact Section */
-.contact-section {
-    padding: 120px 0;
-    background: var(--bg-secondary);
-}
-
-.contact-card {
-    background: var(--glass-bg);
-    backdrop-filter: var(--blur);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--pill-radius);
-    padding: 48px;
-    text-align: center;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.contact-title {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 16px;
-    letter-spacing: 1px;
-}
-
-.contact-subtitle {
-    font-size: 16px;
-    color: var(--text-secondary);
-    margin-bottom: 32px;
-}
-
-.contact-email {
-    font-family: 'Bahnschrift', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-cyan-dark) 100%);
-    color: #0a0f14;
-    padding: 16px 32px;
-    border-radius: 25px;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s ease;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 16px rgba(83, 245, 255, 0.3);
-}
-
-.contact-email:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(83, 245, 255, 0.5);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 8px 16px;
-        gap: 24px;
-    }
-    
-    .nav-links {
-        gap: 16px;
-    }
-    
-    .nav-link {
-        font-size: 12px;
-        padding: 6px 12px;
-    }
-    
-    .nav-cta {
-        font-size: 12px;
-        padding: 8px 16px;
-    }
-    
-    .section-content {
-        grid-template-columns: 1fr;
-        gap: 48px;
-    }
-    
-    .services-header {
-        flex-direction: column;
-        gap: 32px;
-    }
-    
-    .services-arrows {
-        transform: rotate(90deg);
-    }
-    
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar {
-        width: 90%;
-    }
-    
-    .container {
-        padding: 0 16px;
-    }
-    
-    .services-section,
-    .explainer-section,
-    .showreel-section,
-    .contact-section {
-        padding: 80px 0;
-    }
-}
+    <script src="script.js"></script>
+</body>
+</html>
