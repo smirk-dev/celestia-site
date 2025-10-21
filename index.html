@@ -27,11 +27,23 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
     
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- SVG Filter for Glass Distortion Effect -->
+    <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+        <defs>
+            <filter id="glass-distortion" x="-50%" y="-50%" width="200%" height="200%">
+                <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" type="fractalNoise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="75"/>
+                <feGaussianBlur stdDeviation="2.5"/>
+            </filter>
+        </defs>
+    </svg>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="nav-container">
+        <!-- Commented out old navbar structure -->
+        <!-- <div class="nav-container" id="primary-navigation">
             <div class="nav-left">
                 <a href="#home" class="nav-link">HOME</a>
                 <a href="#about" class="nav-link">ABOUT</a>
@@ -40,13 +52,27 @@
                 <a href="#services" class="nav-link">SERVICES</a>
                 <a href="#contact" class="nav-link">CONTACT</a>
             </div>
-            <div class="hamburger" id="hamburger">
+            <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false" tabindex="0">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div> -->
+        
+        <!-- New frosted glass navbar -->
+        <div class="frosted-navbar" id="primary-navigation">
+            <a href="#home" class="frosted-nav-link">HOME</a>
+            <a href="#about" class="frosted-nav-link">ABOUT</a>
+            <a href="#services" class="frosted-nav-link">SERVICES</a>
+            <a href="#contact" class="frosted-nav-link">CONTACT</a>
+            <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false" tabindex="0">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
         </div>
     </nav>
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
