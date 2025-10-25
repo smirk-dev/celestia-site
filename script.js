@@ -36,17 +36,23 @@ class CustomCursor {
         });
 
         // Add hover effects for interactive elements
+        // Track elements that already have listeners to avoid duplicates
+        const interactiveElementsWithListeners = new WeakSet();
+
         const updateInteractiveElements = () => {
             const interactiveElements = document.querySelectorAll('a, button, .nav-link, .showreel-video, [role="button"], input, textarea');
             
             interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    this.cursor.classList.add('hover');
-                });
-                
-                el.addEventListener('mouseleave', () => {
-                    this.cursor.classList.remove('hover');
-                });
+                if (!interactiveElementsWithListeners.has(el)) {
+                    el.addEventListener('mouseenter', () => {
+                        this.cursor.classList.add('hover');
+                    });
+                    
+                    el.addEventListener('mouseleave', () => {
+                        this.cursor.classList.remove('hover');
+                    });
+                    interactiveElementsWithListeners.add(el);
+                }
             });
         };
 
@@ -164,6 +170,46 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Active navigation link handler
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.frosted-nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Remove active class from all links
+            navLinks.forEach(nav => nav.classList.remove('frosted-nav-link-active'));
+            
+            // Add active class to clicked link
+            this.classList.add('frosted-nav-link-active');
+        });
+    });
+    
+    // Set active based on scroll position
+    const sections = document.querySelectorAll('section[id]');
+    
+    function setActiveNav() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('frosted-nav-link-active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('frosted-nav-link-active');
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', setActiveNav);
+    setActiveNav(); // Call once on load
+});
+
 // Fullscreen video functionality for showreel
 function initFullscreenVideo() {
     const showreelVideo = document.querySelector('.showreel-video');
@@ -260,9 +306,266 @@ function initFullscreenVideo() {
 // Initialize fullscreen video when DOM is loaded
 document.addEventListener('DOMContentLoaded', initFullscreenVideo);
 
+// Fullscreen video functionality for explainer
+function initExplainerFullscreenVideo() {
+    const explainerVideo = document.querySelector('.explainer-video');
+    const playButton = document.getElementById('explainer-play-button');
+    const videoContainer = document.querySelector('.explainer-section .video-container');
+    
+    if (!explainerVideo || !playButton) return;
+
+    // Create fullscreen overlay
+    const createFullscreenOverlay = () => {
+        const overlay = document.createElement('div');
+        overlay.className = 'fullscreen-video-overlay';
+        overlay.innerHTML = `
+            <div class="fullscreen-video-container">
+                <video class="fullscreen-video" controls autoplay>
+                    <source src="./assets/explainer.mp4" type="video/mp4">
+                </video>
+                <button class="close-fullscreen">×</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        return overlay;
+    };
+
+    // Function to open fullscreen
+    const openFullscreen = () => {
+        const overlay = createFullscreenOverlay();
+        const fullscreenVideo = overlay.querySelector('.fullscreen-video');
+        const closeBtn = overlay.querySelector('.close-fullscreen');
+
+        // Set video time to match the clicked video
+        fullscreenVideo.currentTime = explainerVideo.currentTime;
+        
+        // Show overlay
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        // Close functionality
+        const closeFullscreen = () => {
+            // Update original video time before closing
+            explainerVideo.currentTime = fullscreenVideo.currentTime;
+            overlay.remove();
+            document.body.style.overflow = 'auto';
+        };
+
+        closeBtn.addEventListener('click', closeFullscreen);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeFullscreen();
+        });
+
+        // ESC key to close
+        const handleKeydown = (e) => {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+                document.removeEventListener('keydown', handleKeydown);
+            }
+        };
+        document.addEventListener('keydown', handleKeydown);
+    };
+
+    // Add click handlers with proper event handling
+    const handleClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openFullscreen();
+    };
+
+    // Only attach to the video container
+    videoContainer.addEventListener('click', handleClick);
+
+    // Show/hide play button based on video state
+    const updatePlayButton = () => {
+        if (explainerVideo.paused) {
+            playButton.classList.remove('hidden');
+        } else {
+            playButton.classList.add('hidden');
+        }
+    };
+
+    // Listen for video state changes
+    explainerVideo.addEventListener('play', updatePlayButton);
+    explainerVideo.addEventListener('pause', updatePlayButton);
+    explainerVideo.addEventListener('loadeddata', updatePlayButton);
+
+    // Initial state
+    updatePlayButton();
+
+    // Add hover cursor pointer
+    explainerVideo.style.cursor = 'pointer';
+    videoContainer.style.cursor = 'pointer';
+}
+
+// Initialize explainer video when DOM is loaded
+document.addEventListener('DOMContentLoaded', initExplainerFullscreenVideo);
+
+// Diagonal Video Thumbnail Click Handler
+function initDiagonalVideoThumbnails() {
+    const videoWrappers = document.querySelectorAll('.video-thumbnail-wrapper');
+    
+    if (videoWrappers.length === 0) return;
+
+    // Video sources mapping
+    const videoSources = {
+        'explainer': './assets/explainer.mp4',
+        'showreel': './assets/showreel.mp4'
+    };
+
+    // Create fullscreen overlay for diagonal videos
+    const createDiagonalVideoOverlay = (videoSrc) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'fullscreen-video-overlay';
+        overlay.innerHTML = `
+            <div class="fullscreen-video-container">
+                <video class="fullscreen-video" controls autoplay>
+                    <source src="${videoSrc}" type="video/mp4">
+                </video>
+                <button class="close-fullscreen">×</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        return overlay;
+    };
+
+    // Function to open fullscreen video
+    const openDiagonalVideo = (videoSrc) => {
+        const overlay = createDiagonalVideoOverlay(videoSrc);
+        const fullscreenVideo = overlay.querySelector('.fullscreen-video');
+        const closeBtn = overlay.querySelector('.close-fullscreen');
+
+        // Show overlay
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        // Close functionality
+        const closeFullscreen = () => {
+            overlay.remove();
+            document.body.style.overflow = 'auto';
+        };
+
+        closeBtn.addEventListener('click', closeFullscreen);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeFullscreen();
+        });
+
+        // ESC key to close
+        const handleKeydown = (e) => {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+                document.removeEventListener('keydown', handleKeydown);
+            }
+        };
+        document.addEventListener('keydown', handleKeydown);
+    };
+
+    // Add click handlers to all video thumbnail wrappers
+    videoWrappers.forEach(wrapper => {
+        wrapper.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const videoId = wrapper.getAttribute('data-video');
+            const videoSrc = videoSources[videoId];
+            
+            if (videoSrc) {
+                openDiagonalVideo(videoSrc);
+            } else {
+                console.warn(`No video source found for: ${videoId}`);
+            }
+        });
+    });
+}
+
+// Initialize diagonal video thumbnails when DOM is loaded
+document.addEventListener('DOMContentLoaded', initDiagonalVideoThumbnails);
+
+// Triangle Button Video Modal Functionality
+function initTriangleButtonVideos() {
+    const triangleButtons = document.querySelectorAll('.triangle-btn');
+    
+    if (triangleButtons.length === 0) return;
+
+    // Video sources mapping
+    const videoSources = {
+        'explainer': './assets/explainer.mp4',
+        'showreel-1': './assets/showreel.mp4',
+        'showreel-2': './assets/showreel.mp4',
+        'showreel-3': './assets/showreel.mp4'
+    };
+
+    // Create fullscreen overlay for triangle buttons
+    const createTriangleVideoOverlay = (videoSrc) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'fullscreen-video-overlay';
+        overlay.innerHTML = `
+            <div class="fullscreen-video-container">
+                <video class="fullscreen-video" controls autoplay>
+                    <source src="${videoSrc}" type="video/mp4">
+                </video>
+                <button class="close-fullscreen">×</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        return overlay;
+    };
+
+    // Function to open fullscreen video from triangle button
+    const openTriangleVideo = (videoSrc) => {
+        const overlay = createTriangleVideoOverlay(videoSrc);
+        const fullscreenVideo = overlay.querySelector('.fullscreen-video');
+        const closeBtn = overlay.querySelector('.close-fullscreen');
+
+        // Show overlay
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        // Close functionality
+        const closeFullscreen = () => {
+            overlay.remove();
+            document.body.style.overflow = 'auto';
+        };
+
+        closeBtn.addEventListener('click', closeFullscreen);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeFullscreen();
+        });
+
+        // ESC key to close
+        const handleKeydown = (e) => {
+            if (e.key === 'Escape') {
+                closeFullscreen();
+                document.removeEventListener('keydown', handleKeydown);
+            }
+        };
+        document.addEventListener('keydown', handleKeydown);
+    };
+
+    // Add click handlers to all triangle buttons
+    triangleButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const videoId = button.getAttribute('data-video');
+            const videoSrc = videoSources[videoId];
+            
+            if (videoSrc) {
+                openTriangleVideo(videoSrc);
+            } else {
+                console.warn(`No video source found for: ${videoId}`);
+            }
+        });
+    });
+}
+
+// Initialize triangle button videos when DOM is loaded
+document.addEventListener('DOMContentLoaded', initTriangleButtonVideos);
+
 // Interactive 3D Arrow using Three.js - FIXED VERSION
 class InteractiveArrow {
-    constructor() {
+    constructor(containerId = 'arrow-container', size = 250) {
         this.scene = null;
         this.camera = null;
         this.renderer = null;
@@ -272,6 +575,8 @@ class InteractiveArrow {
         this.loaded = false;
         this.raycaster = new THREE.Raycaster();
         this.mouseVector = new THREE.Vector2();
+        this.size = size;
+        this.containerId = containerId;
         
         this.init();
         this.addEventListeners();
@@ -280,9 +585,9 @@ class InteractiveArrow {
 
     init() {
         // Create container
-        this.container = document.getElementById('arrow-container');
+        this.container = document.getElementById(this.containerId);
         if (!this.container) {
-            console.error('Arrow container not found');
+            console.error(`Arrow container ${this.containerId} not found`);
             return;
         }
 
@@ -299,7 +604,7 @@ class InteractiveArrow {
             antialias: true,
             powerPreference: "high-performance"
         });
-        this.renderer.setSize(250, 250);
+        this.renderer.setSize(this.size, this.size);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.renderer.setClearColor(0x000000, 0);
         this.renderer.shadowMap.enabled = true;
@@ -381,13 +686,13 @@ class InteractiveArrow {
     }
 
     setupArrowMaterial() {
-        // Set the arrow material to white with cyan glow
+        // Set the arrow material to white
         this.arrow.traverse((child) => {
             if (child.isMesh) {
                 child.material = new THREE.MeshPhongMaterial({
                     color: 0xFFFFFF,
-                    emissive: 0x6BFFFA,
-                    emissiveIntensity: 0.15,
+                    emissive: 0x000000,
+                    emissiveIntensity: 0,
                     shininess: 100,
                     transparent: true,
                     opacity: 0.95
@@ -400,12 +705,26 @@ class InteractiveArrow {
     setupArrowTransform() {
         // Scale the arrow appropriately
         this.arrow.scale.set(0.5, 0.5, 0.5);
-        
-        // Tilt the arrow 10 degrees towards the right
-        this.arrow.rotation.z = Math.PI / 18; // 10 degrees in radians
-        
         // Position the arrow
         this.arrow.position.set(0, 0, 0);
+        // Set initial rotation
+        this.updateArrowRotation();
+    }
+
+    updateArrowRotation(angle = null, mouseX = 0, mouseY = 0) {
+        // Default tilt if no angle provided
+        if (angle === null) {
+            // Default tilt 10 degrees to the right
+            this.arrow.rotation.z = Math.PI / 18;
+            this.arrow.rotation.x = 0;
+            this.arrow.rotation.y = 0;
+        } else {
+            // Rotate arrow to point towards mouse
+            this.arrow.rotation.z = angle;
+            // Add slight tilt based on mouse position for dynamic effect
+            this.arrow.rotation.x = mouseY * 0.2;
+            this.arrow.rotation.y = mouseX * 0.1;
+        }
     }
 
     createFallbackArrow() {
@@ -467,14 +786,8 @@ class InteractiveArrow {
             // Calculate angle for arrow to point towards cursor
             const angle = Math.atan2(this.mouseVector.y, this.mouseVector.x);
             
-            // Update arrow rotation to point towards mouse
-            if (this.arrow) {
-                this.arrow.rotation.z = angle;
-                
-                // Add slight tilt based on mouse position for more dynamic effect
-                this.arrow.rotation.x = this.mouseVector.y * 0.2;
-                this.arrow.rotation.y = this.mouseVector.x * 0.1;
-            }
+            // Consolidated arrow rotation logic
+            this.updateArrowRotation(angle, this.mouseVector.x, this.mouseVector.y);
         });
 
         // Handle window resize
@@ -482,22 +795,6 @@ class InteractiveArrow {
             if (this.renderer) {
                 this.renderer.setSize(250, 250);
                 this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            }
-        });
-
-        // Handle mouse enter/leave for container
-        this.container.addEventListener('mouseenter', () => {
-            if (this.arrow) {
-                // Scale up slightly on hover
-                this.arrow.scale.setScalar(1.3);
-            }
-        });
-
-        this.container.addEventListener('mouseleave', () => {
-            if (this.arrow) {
-                // Reset scale and rotation when mouse leaves
-                this.arrow.scale.setScalar(1.2);
-                this.arrow.rotation.set(0, 0, 0);
             }
         });
     }
@@ -510,8 +807,9 @@ class InteractiveArrow {
             const time = Date.now() * 0.002;
             this.arrow.position.y = Math.sin(time) * 0.05;
             this.arrow.position.x = Math.cos(time * 0.7) * 0.02;
-            
-            // Removed automatic rotation - arrow now only rotates based on mouse movement
+
+            // Ensure rotation logic is always handled in updateArrowRotation
+            // (No direct rotation changes here)
         }
         
         if (this.renderer && this.scene && this.camera) {
@@ -533,16 +831,27 @@ class InteractiveArrow {
 window.addEventListener('load', () => {
     // Check if Three.js is loaded
     if (typeof THREE !== 'undefined') {
-        console.log('Initializing Interactive 3D Arrow...');
-        new InteractiveArrow();
+        console.log('Initializing Interactive 3D Arrows...');
+        
+        // Create left arrow for services section
+        if (document.getElementById('arrow-container-left')) {
+            const leftArrow = new InteractiveArrow('arrow-container-left', 180);
+            console.log('Left arrow created for services section');
+        }
+        
+        // Create right arrow for services section (symmetrical, same behavior)
+        if (document.getElementById('arrow-container-right')) {
+            const rightArrow = new InteractiveArrow('arrow-container-right', 180);
+            console.log('Right arrow created for services section');
+        }
     } else {
-        console.warn('Three.js not loaded. 3D arrow will not be displayed.');
+        console.warn('Three.js not loaded. 3D arrows will not be displayed.');
     }
 });
 
 // Intersection Observer for scroll animations
 const observerOptions = {
-    threshold: 0.1,
+    threshold: 0.2,
     rootMargin: '0px 0px -50px 0px'
 };
 
@@ -556,7 +865,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for animations
 document.addEventListener('DOMContentLoaded', () => {
-    const elementsToObserve = document.querySelectorAll('.agency-section, .showreel-section, .services-section, .service-card');
+    const elementsToObserve = document.querySelectorAll('.agency-section, .explainer-section, .showreel-section, .services-section, .sv-card, .contact-section');
     elementsToObserve.forEach(el => observer.observe(el));
 });
 
@@ -564,12 +873,19 @@ document.addEventListener('DOMContentLoaded', () => {
 const style = document.createElement('style');
 style.textContent = `
     .agency-section,
+    .explainer-section,
     .showreel-section,
     .services-section,
-    .service-card {
+    .contact-section {
         opacity: 0;
         transform: translateY(30px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .sv-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
     }
     
     .animate-in {
@@ -577,9 +893,12 @@ style.textContent = `
         transform: translateY(0) !important;
     }
     
-    .service-card:nth-child(1) { transition-delay: 0.1s; }
-    .service-card:nth-child(2) { transition-delay: 0.2s; }
-    .service-card:nth-child(3) { transition-delay: 0.3s; }
+    .sv-card:nth-child(1) { transition-delay: 0.1s; }
+    .sv-card:nth-child(2) { transition-delay: 0.2s; }
+    .sv-card:nth-child(3) { transition-delay: 0.3s; }
+    .sv-card:nth-child(4) { transition-delay: 0.1s; }
+    .sv-card:nth-child(5) { transition-delay: 0.2s; }
+    .sv-card:nth-child(6) { transition-delay: 0.3s; }
 `;
 document.head.appendChild(style);
 
