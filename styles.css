@@ -675,9 +675,6 @@ body::after {
 .explainer-diagonal {
     background: rgba(21, 21, 21, 0.45);
     backdrop-filter: blur(8px) brightness(0.8);
-.explainer-diagonal {
-    background: rgba(21, 21, 21, 0.45);
-    backdrop-filter: blur(8px) brightness(0.8);
     -webkit-backdrop-filter: blur(8px) brightness(0.8);
     clip-path: polygon(0 0, calc(100% - 2px) 0, 0 calc(100% - 2px));
     position: absolute;
@@ -697,11 +694,9 @@ body::after {
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
-    border: 2px solid #6BFFFA; /* Visual cue for interactive region */
-    box-shadow: 0 0 24px rgba(107, 255, 250, 0.15); /* Additional visual cue */
 }
-    background: rgba(21, 21, 21, 0.45);
-    backdrop-filter: blur(8px) brightness(0.8);
+
+/* Right Triangle: OUR SHOWREEL */
 .showreel-diagonal {
     background: rgba(21, 21, 21, 0.45);
     backdrop-filter: blur(8px) brightness(0.8);
@@ -724,9 +719,10 @@ body::after {
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
-    border: 2px solid #6BFFFA; /* Visual cue for interactive region */
-    box-shadow: 0 0 24px rgba(107, 255, 250, 0.15); /* Additional visual cue */
 }
+
+/* Video Thumbnail Wrapper */
+.video-thumbnail-wrapper {
     position: absolute;
     top: 0;
     left: 0;
