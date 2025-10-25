@@ -36,17 +36,23 @@ class CustomCursor {
         });
 
         // Add hover effects for interactive elements
+        // Track elements that already have listeners to avoid duplicates
+        const interactiveElementsWithListeners = new WeakSet();
+
         const updateInteractiveElements = () => {
             const interactiveElements = document.querySelectorAll('a, button, .nav-link, .showreel-video, [role="button"], input, textarea');
             
             interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    this.cursor.classList.add('hover');
-                });
-                
-                el.addEventListener('mouseleave', () => {
-                    this.cursor.classList.remove('hover');
-                });
+                if (!interactiveElementsWithListeners.has(el)) {
+                    el.addEventListener('mouseenter', () => {
+                        this.cursor.classList.add('hover');
+                    });
+                    
+                    el.addEventListener('mouseleave', () => {
+                        this.cursor.classList.remove('hover');
+                    });
+                    interactiveElementsWithListeners.add(el);
+                }
             });
         };
 
@@ -699,12 +705,26 @@ class InteractiveArrow {
     setupArrowTransform() {
         // Scale the arrow appropriately
         this.arrow.scale.set(0.5, 0.5, 0.5);
-        
-        // Tilt the arrow 10 degrees towards the right
-        this.arrow.rotation.z = Math.PI / 18; // 10 degrees in radians
-        
         // Position the arrow
         this.arrow.position.set(0, 0, 0);
+        // Set initial rotation
+        this.updateArrowRotation();
+    }
+
+    updateArrowRotation(angle = null, mouseX = 0, mouseY = 0) {
+        // Default tilt if no angle provided
+        if (angle === null) {
+            // Default tilt 10 degrees to the right
+            this.arrow.rotation.z = Math.PI / 18;
+            this.arrow.rotation.x = 0;
+            this.arrow.rotation.y = 0;
+        } else {
+            // Rotate arrow to point towards mouse
+            this.arrow.rotation.z = angle;
+            // Add slight tilt based on mouse position for dynamic effect
+            this.arrow.rotation.x = mouseY * 0.2;
+            this.arrow.rotation.y = mouseX * 0.1;
+        }
     }
 
     createFallbackArrow() {
@@ -766,14 +786,8 @@ class InteractiveArrow {
             // Calculate angle for arrow to point towards cursor
             const angle = Math.atan2(this.mouseVector.y, this.mouseVector.x);
             
-            // Update arrow rotation to point towards mouse
-            if (this.arrow) {
-                this.arrow.rotation.z = angle;
-                
-                // Add slight tilt based on mouse position for more dynamic effect
-                this.arrow.rotation.x = this.mouseVector.y * 0.2;
-                this.arrow.rotation.y = this.mouseVector.x * 0.1;
-            }
+            // Consolidated arrow rotation logic
+            this.updateArrowRotation(angle, this.mouseVector.x, this.mouseVector.y);
         });
 
         // Handle window resize
@@ -793,8 +807,9 @@ class InteractiveArrow {
             const time = Date.now() * 0.002;
             this.arrow.position.y = Math.sin(time) * 0.05;
             this.arrow.position.x = Math.cos(time * 0.7) * 0.02;
-            
-            // Removed automatic rotation - arrow now only rotates based on mouse movement
+
+            // Ensure rotation logic is always handled in updateArrowRotation
+            // (No direct rotation changes here)
         }
         
         if (this.renderer && this.scene && this.camera) {
