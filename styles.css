@@ -77,38 +77,6 @@ html, body {
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'proxima-nova';
-    src: url('./assets/Fontspring-DEMO-proximanova-regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'proxima-nova';
-    src: url('./assets/Fontspring-DEMO-proximanova-medium.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'proxima-nova';
-    src: url('./assets/Fontspring-DEMO-proximanova-semibold.otf') format('opentype');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'proxima-nova';
-    src: url('./assets/Fontspring-DEMO-proximanova-bold.otf') format('opentype');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
 :root {
     --bg-primary: #0d1f26;
     --bg-secondary: #0a1f2e;
@@ -130,7 +98,7 @@ html {
 }
 
 body {
-    font-family: 'proxima-nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: url('./assets/background.png') center/cover no-repeat fixed;
     color: var(--text-primary);
     line-height: 1.6;
@@ -307,7 +275,7 @@ body::after {
 .nav-link {
     color: var(--text-primary);
     text-decoration: none;
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 14px;
     letter-spacing: 0.5px;
@@ -498,7 +466,7 @@ body::after {
 }
 
 .hero-subtitle-small {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(0.875rem, 1.5vw, 1.125rem);
     font-weight: 500;
     color: rgba(255, 255, 255, 0.7);
@@ -508,7 +476,7 @@ body::after {
 }
 
 .hero-subtitle-large {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: 700;
     color: #6BFFFA;
@@ -518,7 +486,7 @@ body::after {
 }
 
 .hero-description {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(0.875rem, 1vw, 1rem);
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.7);
@@ -547,7 +515,7 @@ body::after {
 }
 
 .advantage-small {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(0.875rem, 1.5vw, 1.125rem);
     font-weight: 500;
     color: rgba(255, 255, 255, 0.7);
@@ -556,7 +524,7 @@ body::after {
 }
 
 .advantage-large {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: 700;
     color: #6BFFFA;
@@ -631,7 +599,7 @@ body::after {
 }
 
 .agency-title {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 600;
     line-height: 1.2;
@@ -652,7 +620,7 @@ body::after {
 }
 
 .agency-description {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.8;
     color: var(--text-secondary);
@@ -790,27 +758,27 @@ body::after {
 }
 
 .title-top {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(1.8rem, 3.5vw, 2.5rem);
     font-weight: 700;
     color: #f5f5f5;
     display: block;
     line-height: 1.2;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
 }
 
 .title-main {
-    font-family: 'Fontspring Theseasons', 'Dancing Script', cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(3.2rem, 5.5vw, 4.8rem);
     font-weight: bold;
-    font-style: italic;
+    font-style: normal;
     color: #32b8c6;
     display: block;
     line-height: 1;
 }
 
 .section-description {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     line-height: 1.7;
     color: rgba(245, 245, 245, 0.85);
@@ -907,7 +875,7 @@ body::after {
 }
 
 .services-our {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: white;
     font-style: normal;
     font-size: clamp(2rem, 4vw, 3rem);
@@ -966,7 +934,7 @@ body::after {
 }
 
 .service-card h3 {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 20px;
@@ -974,7 +942,7 @@ body::after {
 }
 
 .service-card p {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: var(--text-secondary);
     line-height: 1.7;
 }
@@ -994,7 +962,7 @@ body::after {
 }
 
 .sv-eyebrow {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     color: #6BFFFA;
@@ -1010,7 +978,7 @@ body::after {
 }
 
 .sv-title {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 0.15em;
@@ -1020,7 +988,7 @@ body::after {
 }
 
 .sv-sub {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: rgba(255, 255, 255, 0.7);
     max-width: 600px;
@@ -1086,7 +1054,7 @@ body::after {
 }
 
 .sv-card-title {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.1rem;
     font-weight: 600;
     color: #ffffff;
@@ -1096,7 +1064,7 @@ body::after {
 }
 
 .sv-card-text {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.7);
     line-height: 1.6;
@@ -1117,7 +1085,7 @@ body::after {
 }
 
 .sv-cta-text {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(1.25rem, 3vw, 1.75rem);
     font-weight: 600;
     color: var(--text-primary);
@@ -1132,7 +1100,7 @@ body::after {
     color: #50c8dc;
     padding: 16px 40px;
     border-radius: 30px;
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
@@ -1185,7 +1153,7 @@ body::after {
 }
 
 .contact-title {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 700;
     margin-bottom: 20px;
@@ -1195,7 +1163,7 @@ body::after {
 }
 
 .contact-subtitle {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(1rem, 2vw, 1.25rem);
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 50px;
@@ -1293,7 +1261,7 @@ body::after {
 }
 
 .footer p {
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: var(--text-muted);
     font-size: 14px;
     position: relative;
