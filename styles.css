@@ -759,12 +759,12 @@ body::after {
 
 .title-top {
     font-family: 'Roboto', sans-serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-size: clamp(2.4rem, 4.5vw, 3.5rem);
     font-weight: 700;
     color: #f5f5f5;
     display: block;
     line-height: 1.2;
-    margin-bottom: 2px;
+    margin-bottom: 0.1px;
 }
 
 .title-main {
