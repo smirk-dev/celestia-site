@@ -207,7 +207,7 @@ body::after {
 .frosted-nav-link {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    font-family: 'Cropaso', 'Bahnschrift', 'Inter', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 13px;
     letter-spacing: 0.5px;
